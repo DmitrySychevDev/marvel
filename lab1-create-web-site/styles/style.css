@@ -1,0 +1,351 @@
+/*Обнуление*/
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+:focus,
+:active {
+  outline: none;
+}
+a:focus,
+a:active {
+  outline: none;
+}
+
+nav,
+footer,
+header,
+aside {
+  display: block;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+input,
+button,
+textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+button {
+  cursor: pointer;
+}
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+a,
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+ul li {
+  list-style: none;
+}
+img {
+  vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: 400;
+}
+/*--------------------*/
+
+/*Основной стиль*/
+
+/*Стиль для навбара*/
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  position: relative;
+  background-color: #ffffff;
+  z-index: 2;
+  filter: drop-shadow(0px 2px 4px rgba(38, 50, 56, 0.16))
+    drop-shadow(0px 4px 8px rgba(38, 50, 56, 0.08));
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+}
+.navbar__logo-block {
+  display: flex;
+  align-items: center;
+}
+.logo_image--burger {
+  display: none;
+}
+.logo__image img {
+  width: 70px;
+  height: 64px;
+}
+.logo__name {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 56px;
+}
+.navbar__links-block {
+  display: flex;
+  gap: 15px;
+}
+.links__link a {
+  color: #6c5ce7;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 32px;
+}
+.links__link a:hover {
+  text-decoration: underline;
+}
+.links__link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.links__link--active a {
+  color: #000;
+}
+
+.links__link--active::before {
+  display: none !important;
+}
+.links__link::before {
+  display: inline-block;
+  content: "";
+  width: 5px;
+  height: 5px;
+  background-color: #fdcb6e;
+  border-radius: 50%;
+}
+
+.navbar__button-block button {
+  background-color: #000;
+  color: #ffffff;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  width: 170px;
+  height: 64px;
+  border-radius: 30px;
+}
+
+.navbar__button-block button:hover {
+  transform: scale(1.1);
+}
+/*стиль заголовка*/
+.title {
+  position: relative;
+  background: url("../images/Dots.svg");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 15% 50vh;
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 60px;
+}
+.title::before {
+  content: "";
+  display: block;
+  position: absolute;
+  right: -80%;
+  z-index: 0;
+  top: -150%;
+  width: 130%;
+  height: 100vh;
+  background: #fdcb6e;
+  opacity: 0.4;
+  box-shadow: -68.7163px 0px 91.6235px rgba(0, 0, 0, 0.16);
+  border-radius: 54.4825px;
+  transform: rotate(-45deg);
+}
+
+.title__text {
+  position: relative;
+  margin-top: 80px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 96px;
+  line-height: 104px;
+  text-align: center;
+  z-index: 0;
+  max-width: 90%;
+}
+.title__pink-text {
+  color: #ff1493;
+  text-shadow: 3px 3px 0px #ffffff;
+  position: relative;
+}
+.title__pink-text::after {
+  content: "";
+  background: #55efc4;
+  width: 191px;
+  height: 51px;
+  position: absolute;
+  bottom: -10px;
+  left: -20px;
+  z-index: -1;
+  border-radius: 20px;
+}
+
+.title__small-text {
+  display: block;
+  font-size: 64px;
+}
+
+.title__arrow {
+  display: none;
+}
+
+/*Стили для сетки с карточками*/
+
+.card-grid {
+  display: grid;
+  column-gap: 30px;
+  margin-top: 64px;
+  row-gap: 30px;
+  grid-template-areas:
+    "LT C2 C2 RT RT"
+    "C1 C2 C2 C4 C6"
+    "C1 C3 C5 C5 C7"
+    "BT C3 C5 C5 .";
+
+  grid-template-rows: 10vh 40vh 35vh 10vh;
+  grid-template-columns: 20% 25% 20% 12% 12%;
+  margin-left: 80px;
+  min-width: 780px;
+  margin-right: 80px;
+}
+.card-grid--left-text {
+  justify-self: end;
+  grid-area: LT;
+}
+.card-grid__text {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 32px;
+}
+.card-grid__button button {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 48px;
+  color: #6c5ce7;
+  background: #ffffff;
+  box-shadow: 2px 8px 24px rgba(38, 50, 56, 0.2),
+    2px 16px 32px rgba(38, 50, 56, 0.3);
+  border-radius: 40px;
+  width: 100%;
+}
+.card-grid__button button:hover {
+  transform: scale(1.05);
+}
+.card-grid__button {
+  grid-area: BT;
+}
+.card-grid__card {
+  border-radius: 20px;
+}
+.card-grid--right-text {
+  grid-area: RT;
+}
+
+.card-grid .card-grid__card:nth-child(2) {
+  background: #fdcb6e;
+  padding-top: 20px;
+  padding-left: 16px;
+  padding-right: 16px;
+  text-align: center;
+  grid-area: C1;
+  font-family: "Inter";
+  font-style: normal;
+}
+.orange-card__title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 32px;
+}
+.orange-card__text {
+  font-weight: 200;
+  font-size: 16px;
+}
+.card-grid .card-grid__card:nth-child(4) {
+  background: #00b894;
+  grid-area: C2;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 56px;
+  color: #ffffff;
+  text-align: center;
+  padding-top: 100px;
+}
+.card-grid .card-grid__card:nth-child(5) {
+  background: #e84393;
+  grid-area: C3;
+}
+.card-grid .card-grid__card:nth-child(7) {
+  background: #a29bfe;
+  grid-area: C4;
+}
+
+.card-grid .card-grid__card:nth-child(8) {
+  background: #6c5ce7;
+  font-family: "Inter";
+  text-align: center;
+  padding-top: 100px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 56px;
+  color: #ffffff;
+  grid-area: C5;
+}
+
+.card-grid .card-grid__card:nth-child(9) {
+  background: url("../images/cross.png") no-repeat;
+  background-size: cover;
+  background-position: center;
+  grid-area: C6;
+}
+.card-grid .card-grid__card:nth-child(10) {
+  grid-area: C7;
+  background: #ff7675;
+}
