@@ -11,31 +11,48 @@
   <body>
     <header>
       <nav class="navbar">
-        <div class="navbar__logo-block">
-          <div class="logo__image">
-            <img class="logo_image--logo" src="./images/logo.svg" alt="logo" />
-            <button class="logo_image--burger">
-              <img src="./images/burger.svg" alt="burger" />
-            </button>
+        <div class="navbar-conteaner">
+          <div class="navbar-wraper">
+            <div class="navbar__logo-block">
+              <div class="logo__image">
+                <img
+                  class="logo_image--logo"
+                  src="./images/logo.svg"
+                  alt="logo"
+                />
+                <button class="logo_image--burger">
+                  <img
+                    class="logo_image--burger__open"
+                    src="./images/burger.svg"
+                    alt="burger"
+                  />
+                  <img
+                    class="logo_image--burger__close"
+                    src="./images/close.png"
+                    alt="close"
+                  />
+                </button>
+              </div>
+              <h2 class="logo__name">Grid</h2>
+            </div>
+            <ul class="navbar__links-block" id="menu">
+              <li class="links__link links__link--active">
+                <a href="#">How it works</a>
+              </li>
+              <li class="links__link">
+                <a href="#">Who we are</a>
+              </li>
+              <li class="links__link">
+                <a href="#">What we do</a>
+              </li>
+              <li class="links__link">
+                <a href="#">Contact us</a>
+              </li>
+            </ul>
+            <div class="navbar__button-block">
+              <button class="sign-in-btn">Sign in</button>
+            </div>
           </div>
-          <h2 class="logo__name">Grid</h2>
-        </div>
-        <ul class="navbar__links-block">
-          <li class="links__link links__link--active">
-            <a href="#">How it works</a>
-          </li>
-          <li class="links__link">
-            <a href="#">Who we are</a>
-          </li>
-          <li class="links__link">
-            <a href="#">What we do</a>
-          </li>
-          <li class="links__link">
-            <a href="#">Contact us</a>
-          </li>
-        </ul>
-        <div class="navbar__button-block">
-          <button class="sign-in-btn">Sign ip</button>
         </div>
       </nav>
       <section class="title">
@@ -85,5 +102,6 @@
         <div class="card-grid__card"></div>
       </article>
     </main>
+    <script src="./scripts/script.js"></script>
   </body>
 </html>
