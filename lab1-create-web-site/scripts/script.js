@@ -6,12 +6,14 @@ let isOpen=false;
 const navbar=document.querySelector(".navbar");
 let oldScrollY=0;
 
+
 const openMenu=()=>{
 
     menu.style.opacity=1;
     menu.style.top=0;
     closeImg.style.display="block";
     openImg.style.display="none";
+    document.body.style.overflow="hidden"
     isOpen=true;
 }
 
@@ -20,7 +22,7 @@ const closeMenu=()=>{
     menu.style.top=" -100vh";
     closeImg.style.display="none";
     openImg.style.display="block";
-
+    document.body.style.overflow="scroll"
     isOpen=false;
 }
 

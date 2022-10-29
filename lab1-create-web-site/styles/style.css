@@ -369,3 +369,160 @@ h6 {
   grid-area: C7;
   background: #ff7675;
 }
+
+/*Блок "Доступные цены"*/
+
+.affordable-pricing {
+  margin-top: 110px;
+  text-align: center;
+}
+.affordable-pricing__title {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 77px;
+}
+
+.affordable-pricing__text {
+  margin-top: 30px;
+  color: #adadad;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 48px;
+}
+.title__blue-text {
+  position: relative;
+  color: #7b68ee;
+  text-shadow: 1px 1px 0px #ffffff;
+}
+.title__blue-text::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  z-index: -1;
+  left: -5px;
+  background-color: #daa520;
+  width: 120px;
+  height: 10px;
+  border-radius: 5px;
+}
+.affordable-pricing__cards {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.pricing-cards__card {
+  text-align: left;
+  padding: 32px 32px;
+  position: relative;
+  border-radius: 16px;
+  height: 500px;
+}
+.pricing-card__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pricing-card-title__descriprion {
+  color: #6c5ce7;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 32px;
+}
+.prise__text {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+}
+.prise__small-text {
+  font-size: 12px;
+  font-weight: 800;
+}
+.pricing-card__features {
+  margin-top: 24px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 32px;
+  color: #2d3436;
+}
+.pricing-card__features > .features__feature:not(:last-child) {
+  margin-bottom: 16px;
+}
+.features__feature {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.feature__icon {
+  background: #c2c2c2;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.feature__icon img {
+  display: block;
+}
+.pricing-card__button {
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+  width: 80%;
+  height: 64px;
+  background-color: #ffffff;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 32px;
+  color: #6c5ce7;
+  border: 1px solid #adadad;
+  border-radius: 16px;
+}
+.pricing-card__button:hover {
+  transform: scale(1.1);
+}
+.pricing-card-title__teg {
+  font-family: "Inter";
+  text-align: center;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 15px;
+  border: 1px solid #6c5ce7;
+  width: 90px;
+  height: 30px;
+  padding-top: 6px;
+  border-radius: 20px;
+}
+
+.pricing-cards__card:nth-child(2) .feature__icon {
+  background: #fdcb6e;
+}
+
+.pricing-cards__card > .pricing-card__features {
+  padding-bottom: 30px;
+}
+.pricing-cards__card:nth-child(2) {
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+.pricing-cards__card:nth-child(2) .pricing-card__button {
+  background: #6c5ce7;
+  color: #ffffff;
+}
+.pricing-cards__card:nth-child(3) .feature__icon {
+  background: #55efc4;
+}
