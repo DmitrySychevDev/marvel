@@ -45,16 +45,16 @@
             </div>
             <ul class="navbar__links-block" id="menu">
               <li class="links__link links__link--active">
-                <a href="#">How it works</a>
+                <a href="#how-it-work">How it works</a>
               </li>
               <li class="links__link">
-                <a href="#">Who we are</a>
+                <a href="#who-we-are">Who we are</a>
               </li>
               <li class="links__link">
-                <a href="#">What we do</a>
+                <a href="#what-we-do">What we do</a>
               </li>
               <li class="links__link">
-                <a href="#">Contact us</a>
+                <a href="#contact-us">Contact us</a>
               </li>
             </ul>
             <div class="navbar__button-block">
@@ -74,7 +74,7 @@
       </section>
     </header>
     <main>
-      <article class="card-grid">
+      <article id="how-it-work" class="card-grid">
         <div class="card-grid--left-text">
           <p class="card-grid__text">
             Use mixed grid with imagery, replace with your own photos and
@@ -110,7 +110,7 @@
         <div class="card-grid__card"></div>
       </article>
       <div class="section-union">
-        <section class="affordable-pricing">
+        <section id="who-we-are" class="affordable-pricing">
           <h2 class="affordable-pricing__title">Affordable pricing</h2>
           <p class="affordable-pricing__text">
             Bill me <span class="title__blue-text">monthly</span> • yearly
@@ -224,7 +224,7 @@
             </div>
           </div>
         </section>
-        <section class="what-we-do">
+        <section id="what-we-do" class="what-we-do">
           <h2 class="what-we-do__title">
             Delivering good designs
             <span class="what-we-do-title__colored-text">since 1954</span
@@ -284,6 +284,95 @@
         </section>
       </div>
     </main>
+    <footer id="contact-us" class="footer">
+      <div class="follow-us__social">
+        <h3 class="footer-header">follow us</h3>
+        <div class="social-items">
+          <div class="social-items__item">
+            <a href="https://facebook.com/">
+              <img src="./images/icon-facebook.svg" alt="facebook" />
+            </a>
+          </div>
+          <div class="social-items__item">
+            <a href="https://ru.linkedin.com/">
+              <img src="./images/icon-linkedin.svg" alt="linkedin" />
+            </a>
+          </div>
+          <div class="social-items__item">
+            <a href="https://slack.com/">
+              <img src="./images//icon-slack.svg" alt="slack" />
+            </a>
+          </div>
+          <div class="social-items__item">
+            <a href="https://twitter.com/">
+              <img src="./images//icon-twitter.svg" alt="twitter" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="follow-us__email">
+        <h3 class="footer-header">follow us</h3>
+        <a href="mailto:hello@fapsterapp.com"> hello@fapsterapp.com </a>
+      </div>
+      <div class="footer__information">
+        <h3 class="footer-header">information</h3>
+        <div class="information__links">
+          <div class="information-links__link">
+            <a href="#">About Fapster app</a>
+          </div>
+          <div class="information-links__link">
+            <a href="#">Onhovered / Active</a>
+          </div>
+          <div class="information-links__link">
+            <a href="#">We are hiring!</a>
+          </div>
+          <div class="information-links__link">
+            <a href="#">Get in Touch</a>
+          </div>
+          <div class="information-links__link">
+            <a href="#">Privacy Policy</a>
+          </div>
+          <div class="information-links__link">
+            <a href="#">Resources</a>
+          </div>
+          <div class="information-links__link">
+            <a href="#">Things We Like</a>
+          </div>
+          <div class="information-links__link">
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__form">
+        <h3 class="footer-header">keep in touch</h3>
+        <form>
+          <div class="form__items">
+            <div class="form-input">
+              <input type="text" placeholder="Your name" />
+              <div>
+                <img src="./images/icon-user.svg" />
+              </div>
+            </div>
+            <div class="form-input">
+              <input type="text" placeholder="Email" />
+              <div>
+                <img src="./images/icon-mail.svg" />
+              </div>
+            </div>
+          </div>
+          <div class="form__items">
+            <div class="form-input form-textarea">
+              <textarea placeholder="Leave your message"></textarea>
+              <img src="./images/icon-edit.svg" />
+            </div>
+            <div class="form-button">
+              <button>Send</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </footer>
+
     <script src="./scripts/script.js"></script>
   </body>
 </html>

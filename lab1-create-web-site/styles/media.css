@@ -23,6 +23,19 @@
   .pricing-cards__card {
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
   }
+
+  /*footer*/
+  .footer {
+    justify-content: center;
+    grid-template-areas:
+      "follow2"
+      "follow1"
+      "info "
+      "form ";
+  }
+  .footer::after {
+    height: 80px;
+  }
 }
 
 @media screen and (max-width: 750px) {
@@ -113,7 +126,7 @@
   }
 
   .title__pink-text::after {
-    width: 120px;
+    width: 140px;
     height: 30px;
     left: -10px;
   }
@@ -260,7 +273,7 @@
     margin-top: 0px;
   }
   .title__blue-text::after {
-    width: 90px;
+    width: 100px;
     height: 5px;
   }
   .pricing-cards__card {
@@ -302,6 +315,76 @@
   .section-union {
     display: flex;
     flex-direction: column-reverse;
+  }
+  /*footer*/
+  .footer {
+    margin-top: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding: 0;
+    grid-template-areas:
+      "form"
+      "info"
+      "follow2"
+      "follow1";
+  }
+  .form__items {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .footer__form {
+    text-align: center;
+  }
+
+  .follow-us__social > .footer-header {
+    display: none;
+  }
+  .form-input {
+    max-width: max-content;
+    width: 290px;
+  }
+
+  .form-textarea textarea {
+    max-width: max-content;
+    width: 290px;
+  }
+  .form-button button {
+    width: 290px;
+    height: 60px;
+  }
+  .footer::after {
+    background: url("../images/Shape.png") no-repeat;
+    z-index: -1;
+    width: 300px;
+    height: 200px;
+    background-size: cover;
+    left: 0;
+    bottom: -50px;
+  }
+  .footer::before {
+    content: "";
+    position: absolute;
+    width: 175px;
+    height: 102px;
+    bottom: -50px;
+    z-index: -1;
+    left: 70px;
+    background: url("../images/dots-footer.svg") no-repeat;
+    background-size: cover;
+  }
+  .information__links {
+    grid-template-columns: 150px 150px;
+    justify-content: center;
+  }
+  .follow-us__email a {
+    font-size: 18px;
+  }
+  .follow-us__email {
+    text-align: center;
+  }
+  .information-links__link a {
+    font-size: 14px;
   }
 }
 @media screen and (max-width: 350px) {

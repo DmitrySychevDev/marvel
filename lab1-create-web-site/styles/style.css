@@ -49,6 +49,7 @@ input,
 button,
 textarea {
   font-family: inherit;
+  background-color: transparent;
 }
 
 input::-ms-clear {
@@ -232,7 +233,7 @@ h6 {
 .title__pink-text::after {
   content: "";
   background: #55efc4;
-  width: 191px;
+  width: 200px;
   height: 51px;
   position: absolute;
   bottom: -10px;
@@ -402,7 +403,7 @@ h6 {
   z-index: -1;
   left: -5px;
   background-color: #daa520;
-  width: 120px;
+  width: 135px;
   height: 10px;
   border-radius: 5px;
 }
@@ -638,4 +639,152 @@ h6 {
 }
 .what-we-do-items__item:nth-child(4) {
   grid-area: "item4";
+}
+/*footer*/
+
+.footer {
+  margin-top: 206px;
+  padding-left: 135px;
+  padding-right: 135px;
+  display: grid;
+  position: relative;
+  grid-template-areas:
+    "follow1 follow2"
+    "info form";
+  gap: 30px;
+}
+
+.footer-header {
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 15px;
+  color: #adadad;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.follow-us__social {
+  grid-area: follow1;
+}
+.social-items {
+  display: flex;
+  gap: 40px;
+}
+
+.follow-us__email {
+  grid-area: follow2;
+}
+
+.follow-us__email a {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 48px;
+  color: #6c5ce7;
+}
+.footer__information {
+  grid-area: info;
+}
+.information__links {
+  display: grid;
+  grid-template-columns: repeat(3, 150px);
+  column-gap: 30px;
+  row-gap: 16px;
+}
+.information-links__link a {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+}
+.information-links__link a:hover {
+  text-decoration: underline;
+}
+.footer__form {
+  grid-area: form;
+}
+.form-input {
+  display: flex;
+  align-items: center;
+  background-color: rgba(194, 194, 194, 0.24);
+  border-radius: 16px;
+  padding: 8px 16px;
+  max-width: 260px;
+  transition: all 0.5s;
+}
+.form-input input,
+textarea {
+  height: 32px;
+  font-size: 18px;
+  width: 90%;
+  transition: all 0.5s;
+}
+
+.form-input input,
+textarea::placeholder {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 32px;
+  color: #2d3436;
+}
+
+.form__items {
+  display: flex;
+  gap: 30px;
+}
+
+.form-input:hover {
+  background-color: rgba(194, 194, 194, 0.6);
+}
+.form-input textarea:focus {
+  padding-left: 10px;
+}
+
+.form-input input:focus {
+  padding-left: 10px;
+}
+
+.form-input input::placeholder {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 32px;
+  color: #2d3436;
+}
+
+.form-input textarea {
+  height: 80px;
+  resize: none;
+}
+.form-textarea {
+  align-items: flex-start;
+}
+.form__items:nth-child(2) {
+  margin-top: 30px;
+}
+
+.form-button button {
+  height: 80px;
+  width: 160px;
+  background-color: #6c5ce7;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+  color: #ffffff;
+  text-align: center;
+  text-transform: uppercase;
+  padding: auto;
+}
+.form-button button:hover {
+  transform: scale(1.1);
+}
+.footer::after {
+  content: "";
+  position: absolute;
+  background: url("../images/wave-footer.png") no-repeat;
+  width: 100vw;
+  height: 100px;
+  bottom: -70px;
+  left: 0;
 }

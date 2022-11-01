@@ -3,6 +3,7 @@ const closeImg = document.querySelector(".logo_image--burger__close");
 const openImg = document.querySelector(".logo_image--burger__open");
 const button = document.querySelector(".logo_image--burger");
 const navbar = document.querySelector(".navbar");
+const links = document.querySelectorAll(".links__link");
 
 let isOpen = false;
 let oldScrollY = 0;
@@ -19,13 +20,15 @@ const openMenu = () => {
 };
 
 const closeMenu = () => {
-  menu.style.opacity = 1;
-  menu.style.top = " -100vh";
+  if (isOpen) {
+    menu.style.opacity = 1;
+    menu.style.top = " -100vh";
 
-  closeImg.style.display = "none";
-  openImg.style.display = "block";
-  document.body.style.overflowY = "scroll";
-  isOpen = false;
+    closeImg.style.display = "none";
+    openImg.style.display = "block";
+    document.body.style.overflowY = "scroll";
+    isOpen = false;
+  }
 };
 
 const menuEventClick = () => {
@@ -47,6 +50,10 @@ const scrollWin = () => {
   }
   oldScrollY = scrolled;
 };
+
+links.forEach((link) => {
+  link.addEventListener("click", closeMenu);
+});
 
 button.addEventListener("click", menuEventClick);
 window.addEventListener("scroll", scrollWin);
