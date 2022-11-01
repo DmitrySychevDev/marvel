@@ -26,7 +26,9 @@ header,
 aside {
   display: block;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 html,
 body {
   height: 100%;
@@ -40,6 +42,8 @@ body {
 }
 body {
   overflow-x: hidden;
+  color: #2d3436;
+  font-family: "Inter", sans-serif;
 }
 input,
 button,
@@ -93,6 +97,7 @@ h6 {
   z-index: 100;
   transition: top 0.2s;
 }
+
 .navbar-conteaner {
   width: 100%;
   height: 100%;
@@ -126,7 +131,6 @@ h6 {
   height: 64px;
 }
 .logo__name {
-  font-family: "Inter";
   font-style: normal;
   font-weight: 700;
   font-size: 48px;
@@ -138,7 +142,6 @@ h6 {
 }
 .links__link a {
   color: #6c5ce7;
-  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -171,7 +174,6 @@ h6 {
 .navbar__button-block button {
   background-color: #000;
   color: #ffffff;
-  font-family: "Inter";
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
@@ -214,7 +216,6 @@ h6 {
 .title__text {
   position: relative;
   margin-top: 80px;
-  font-family: "Inter";
   font-style: normal;
   font-weight: 800;
   font-size: 96px;
@@ -263,24 +264,22 @@ h6 {
     "BT C3 C5 C5 .";
 
   grid-template-rows: 10vh 40vh 35vh 10vh;
-  grid-template-columns: 20% 25% 20% 12% 12%;
-  margin-left: 80px;
-  min-width: 780px;
-  margin-right: 80px;
+  grid-template-columns: 20% 25% 20% 15% 15%;
+  margin-left: 50px;
+  min-width: 560px;
+  margin-right: 100px;
 }
 .card-grid--left-text {
   justify-self: end;
   grid-area: LT;
 }
 .card-grid__text {
-  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 32px;
 }
 .card-grid__button button {
-  font-family: "Inter";
   font-style: normal;
   font-weight: 700;
   font-size: 32px;
@@ -312,7 +311,7 @@ h6 {
   padding-right: 16px;
   text-align: center;
   grid-area: C1;
-  font-family: "Inter";
+
   font-style: normal;
 }
 .orange-card__title {
@@ -327,7 +326,7 @@ h6 {
 .card-grid .card-grid__card:nth-child(4) {
   background: #00b894;
   grid-area: C2;
-  font-family: "Inter";
+
   font-style: normal;
   font-weight: 700;
   font-size: 48px;
@@ -348,7 +347,6 @@ h6 {
 
 .card-grid .card-grid__card:nth-child(8) {
   background: #6c5ce7;
-  font-family: "Inter";
   text-align: center;
   padding-top: 100px;
   font-style: normal;
@@ -377,7 +375,6 @@ h6 {
   text-align: center;
 }
 .affordable-pricing__title {
-  font-family: "Inter";
   font-style: normal;
   font-weight: 900;
   font-size: 64px;
@@ -387,7 +384,6 @@ h6 {
 .affordable-pricing__text {
   margin-top: 30px;
   color: #adadad;
-  font-family: "Inter";
   font-style: normal;
   font-weight: 700;
   font-size: 32px;
@@ -423,6 +419,7 @@ h6 {
   position: relative;
   border-radius: 16px;
   height: 500px;
+  background-color: #ffffff;
 }
 .pricing-card__title {
   display: flex;
@@ -431,14 +428,12 @@ h6 {
 }
 .pricing-card-title__descriprion {
   color: #6c5ce7;
-  font-family: "Inter";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
   line-height: 32px;
 }
 .prise__text {
-  font-family: "Inter";
   font-style: normal;
   font-weight: 700;
   font-size: 48px;
@@ -449,7 +444,6 @@ h6 {
 }
 .pricing-card__features {
   margin-top: 24px;
-  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -483,7 +477,6 @@ h6 {
   width: 80%;
   height: 64px;
   background-color: #ffffff;
-  font-family: "Inter";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -496,7 +489,6 @@ h6 {
   transform: scale(1.1);
 }
 .pricing-card-title__teg {
-  font-family: "Inter";
   text-align: center;
   font-style: normal;
   font-weight: 800;
@@ -513,6 +505,16 @@ h6 {
   background: #fdcb6e;
 }
 
+.pricing-cards__card:nth-child(2)::after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  background: url("../images/wiggle.svg");
+  width: 200px;
+  height: 126px;
+  z-index: -5;
+}
 .pricing-cards__card > .pricing-card__features {
   padding-bottom: 30px;
 }
@@ -525,4 +527,115 @@ h6 {
 }
 .pricing-cards__card:nth-child(3) .feature__icon {
   background: #55efc4;
+}
+/*what we do*/
+.what-we-do {
+  margin-top: 205px;
+  padding-left: 100px;
+}
+.what-we-do__title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 48px;
+  color: #2d3436;
+}
+.what-we-do__text {
+  margin-top: 15px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 36px;
+  width: 80%;
+  color: #2d3436;
+}
+.what-we-do__items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 30px;
+  row-gap: 78px;
+  margin-top: 40px;
+}
+
+.item__icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  padding: 8px;
+}
+
+.item__icon img {
+  height: 56px;
+  width: 56px;
+}
+
+.what-we-do-items__item {
+  position: relative;
+  width: 270px;
+}
+
+.what-we-do-items__item:nth-child(1) > .item__icon {
+  background: #e84393;
+}
+
+.what-we-do-items__item:nth-child(2) > .item__icon {
+  background: #0984e3;
+}
+
+.what-we-do-items__item:nth-child(3) > .item__icon {
+  background: #6c5ce7;
+}
+
+.what-we-do-items__item:nth-child(4) > .item__icon {
+  background: #00b894;
+}
+
+.item__title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+  margin-top: 24px;
+}
+
+.item__text {
+  margin-top: 24px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 32px;
+  margin-bottom: 10px;
+}
+
+.item__button {
+  width: 140px;
+  height: 40px;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 32px;
+  color: #6c5ce7;
+  border: 1px solid #adadad;
+  background-color: #ffffff;
+  position: absolute;
+  bottom: -48px;
+  left: 0;
+  transition: all 0.2s;
+}
+
+.item__button:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.what-we-do-items__item:nth-child(1) {
+  grid-area: "item1";
+}
+.what-we-do-items__item:nth-child(12) {
+  grid-area: "item2";
+}
+.what-we-do-items__item:nth-child(3) {
+  grid-area: "item3";
+}
+.what-we-do-items__item:nth-child(4) {
+  grid-area: "item4";
 }

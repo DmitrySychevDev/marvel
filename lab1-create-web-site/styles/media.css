@@ -1,4 +1,7 @@
 @media screen and (max-width: 1080px) {
+  .links__link a {
+    font-size: 14px;
+  }
   .title {
     background-position: right top;
   }
@@ -8,7 +11,9 @@
     top: -30%;
     right: -50%;
   }
-
+  .card-grid {
+    grid-template-rows: 10vh 30vh 25vh 10vh;
+  }
   .card-grid__button button {
     background: #2d3436;
     color: #ffffff;
@@ -120,11 +125,10 @@
     column-gap: 15px;
     margin-top: 24px;
     margin-right: 10px;
-  }
-  .card-grid {
     grid-template-rows: 10vh 20vh 15vh 10vh;
     grid-template-columns: 20% 25% 20% 12% 12%;
   }
+
   .card-grid__card {
     border-radius: 10px;
   }
@@ -136,6 +140,14 @@
   }
   .orange-card__text {
     font-size: 12px;
+  }
+  .card-grid {
+    grid-template-areas:
+      ". C2 C2 . ."
+      "C1 C2 C2 C4 C6"
+      "C1 C3 C5 C5 C7"
+      ". C3 BT BT .";
+    margin-left: -10px;
   }
   .card-grid .card-grid__card:nth-child(4) {
     font-size: 36px;
@@ -151,6 +163,67 @@
   }
   .card-grid__card__text {
     display: none;
+  }
+  /*Блок "Доступные цены"*/
+  .affordable-pricing {
+    margin-top: 40px;
+  }
+  .pricing-cards__card:nth-child(2)::after {
+    display: none;
+  }
+
+  /*what we do*/
+  .what-we-do {
+    padding-left: 15px;
+    margin-top: 40px;
+  }
+
+  .what-we-do__title {
+    font-size: 24px;
+    line-height: 36px;
+  }
+
+  .what-we-do__text {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  .item__icon {
+    width: 53px;
+    height: 53px;
+    border-radius: 12px;
+    padding: auto;
+  }
+
+  .item__icon img {
+    height: 42px;
+    width: 42px;
+  }
+
+  .what-we-do-title__colored-text {
+    color: #7b68ee;
+  }
+
+  .what-we-do-title__emoji {
+    display: none;
+  }
+  .item__title {
+    font-size: 24px;
+    line-height: 36px;
+    margin-top: 18px;
+  }
+  .item__text {
+    margin-top: 10px;
+    font-size: 18px;
+    line-height: 32px;
+  }
+  .what-we-do-items__item {
+    max-width: 150px;
+  }
+  .item__button {
+    width: 110px;
+    height: 36px;
+    font-size: 18px;
   }
 }
 
@@ -170,17 +243,13 @@
   }
   /*Сетка карточек*/
   .card-grid {
-    grid-template-areas:
-      ". C2 C2 . ."
-      "C1 C2 C2 C4 C6"
-      "C1 C3 C5 C5 C7"
-      ". C3 BT BT .";
-    margin-left: -10px;
+    grid-template-rows: 5vh 10vh 15vh 5vh;
   }
   /*Доступные цены*/
   .affordable-pricing {
     text-align: left;
     padding-left: 15px;
+    margin-top: 80px;
   }
   .affordable-pricing__title {
     font-size: 32px;
@@ -195,12 +264,14 @@
     height: 5px;
   }
   .pricing-cards__card {
+    padding: 24px;
     height: 450px;
   }
   .affordable-pricing__cards {
     gap: 24px;
   }
   .pricing-card-title__descriprion {
+    color: #000000;
     font-size: 18px;
   }
   .prise__text {
@@ -218,6 +289,19 @@
   }
   .pricing-card__button {
     height: 48px;
+  }
+
+  .what-we-do__items {
+    display: grid;
+    grid-template-areas:
+      "item1 item2"
+      "item3 item4";
+    column-gap: 30px;
+    row-gap: 66px;
+  }
+  .section-union {
+    display: flex;
+    flex-direction: column-reverse;
   }
 }
 @media screen and (max-width: 350px) {
