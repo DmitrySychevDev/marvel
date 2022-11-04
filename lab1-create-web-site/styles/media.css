@@ -242,6 +242,9 @@
 
 @media screen and (max-width: 560px) {
   /*Заголовок*/
+  .title {
+    margin-top: 80px;
+  }
   .title::after {
     content: "";
     position: absolute;
@@ -387,7 +390,7 @@
     font-size: 14px;
   }
 }
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 370px) {
   .title::before {
     width: 80%;
     height: 40vh;
