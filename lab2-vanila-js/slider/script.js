@@ -10,6 +10,18 @@ class Slider {
     this.animationIsComplite = true;
     this._plaseSlides();
     this._createDots();
+    this.userIsActive = true;
+    this._startSlideShow();
+  }
+
+  _startSlideShow() {
+    setInterval(() => {
+      if (!this.userIsActive) {
+        this.slideTransition("right")();
+        this.userIsActive = false;
+      }
+      this.userIsActive = false;
+    }, 5000);
   }
 
   _plaseSlides() {
@@ -17,7 +29,7 @@ class Slider {
       switch (index) {
         case this.nearestSlides.curentSlide:
           slide.style.display = "block";
-          slide.style.left = "10%";
+          slide.style.left = "0%";
           break;
         case this.nearestSlides.nextSlide:
           slide.style.display = "block";
@@ -45,6 +57,7 @@ class Slider {
 
   slideTransition = (direction) => {
     return () => {
+      this.userIsActive = true;
       if (this.animationIsComplite) {
         this.animationIsComplite = false;
         let offset = 0;
@@ -54,7 +67,7 @@ class Slider {
           switch (direction) {
             case "right":
               this.slides[this.nearestSlides.curentSlide].style.left = `${
-                10 - offset
+                0 - offset
               }%`;
               this.slides[this.nearestSlides.nextSlide].style.left = `${
                 110 - offset
@@ -62,15 +75,15 @@ class Slider {
               break;
             case "left":
               this.slides[this.nearestSlides.curentSlide].style.left = `${
-                10 + offset
+                0 + offset
               }%`;
               this.slides[this.nearestSlides.prevSlide].style.left = `${
-                -90 + offset
+                -110 + offset
               }%`;
               break;
           }
 
-          if (offset >= 100) {
+          if (offset >= 110) {
             clearInterval(interval);
             this.dotsList
               .item(this.nearestSlides.curentSlide)
