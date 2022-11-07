@@ -1,41 +1,60 @@
 class Slider {
-  constructor(slides, dots) {
-    this.slides = slides;
-    this.dotsWrap = dots;
-    this.nearestSlides = {
-      curentSlide: 0,
-      prevSlide: slides.length - 1,
-      nextSlide: 1,
-    };
-    this.animationIsComplite = true;
+  constructor(slides, dots, startSlide) {
+    this._slides = slides;
+    this._dotsWrap = dots;
+    switch (startSlide) {
+      case 0:
+        this._nearestSlides = {
+          curentSlide: 0,
+          prevSlide: slides.length - 1,
+          nextSlide: 1,
+        };
+        break;
+      case slides.length - 1:
+        this._nearestSlides = {
+          curentSlide: startSlide,
+          prevSlide: startSlide - 1,
+          nextSlide: 0,
+        };
+        break;
+
+      default:
+        this._nearestSlides = {
+          curentSlide: startSlide,
+          prevSlide: startSlide - 1,
+          nextSlide: startSlide + 1,
+        };
+        break;
+    }
+    this._animationIsComplite = true;
     this._plaseSlides();
     this._createDots();
-    this.userIsActive = true;
+    this._userIsActive = true;
     this._startSlideShow();
   }
 
   _startSlideShow() {
     setInterval(() => {
-      if (!this.userIsActive) {
+      if (!this._userIsActive) {
         this.slideTransition("right")();
-        this.userIsActive = false;
+        this._userIsActive = false;
       }
-      this.userIsActive = false;
+      this._userIsActive = false;
     }, 5000);
   }
 
   _plaseSlides() {
-    this.slides.forEach((slide, index) => {
+    this._slides.forEach((slide, index) => {
       switch (index) {
-        case this.nearestSlides.curentSlide:
+        case this._nearestSlides.curentSlide:
           slide.style.display = "block";
           slide.style.left = "0%";
           break;
-        case this.nearestSlides.nextSlide:
+        case this._nearestSlides.nextSlide:
           slide.style.display = "block";
           slide.style.left = "110%";
           break;
-        case this.nearestSlides.prevSlide:
+        case this._nearestSlides.prevSlide:
           slide.style.display = "block";
           slide.style.left = "-110%";
           break;
@@ -46,38 +65,39 @@ class Slider {
   }
 
   _createDots = () => {
-    for (let i = 0; i < this.slides.length; i++) {
+    for (let i = 0; i < this._slides.length; i++) {
       const dot = document.createElement("div");
       dot.classList.add("dots__dot");
-      if (!i) dot.classList.add("dots__dot--active");
-      this.dotsWrap.appendChild(dot);
+      if (i === this._nearestSlides.curentSlide)
+        dot.classList.add("dots__dot--active");
+      this._dotsWrap.appendChild(dot);
     }
-    this.dotsList = document.querySelectorAll(".dots__dot");
+    this._dotsList = document.querySelectorAll(".dots__dot");
   };
 
   slideTransition = (direction) => {
     return () => {
-      this.userIsActive = true;
-      if (this.animationIsComplite) {
-        this.animationIsComplite = false;
+      this._userIsActive = true;
+      if (this._animationIsComplite) {
+        this._animationIsComplite = false;
         let offset = 0;
         const interval = setInterval(() => {
           offset += 1.5;
 
           switch (direction) {
             case "right":
-              this.slides[this.nearestSlides.curentSlide].style.left = `${
+              this._slides[this._nearestSlides.curentSlide].style.left = `${
                 0 - offset
               }%`;
-              this.slides[this.nearestSlides.nextSlide].style.left = `${
+              this._slides[this._nearestSlides.nextSlide].style.left = `${
                 110 - offset
               }%`;
               break;
             case "left":
-              this.slides[this.nearestSlides.curentSlide].style.left = `${
+              this._slides[this._nearestSlides.curentSlide].style.left = `${
                 0 + offset
               }%`;
-              this.slides[this.nearestSlides.prevSlide].style.left = `${
+              this._slides[this._nearestSlides.prevSlide].style.left = `${
                 -110 + offset
               }%`;
               break;
@@ -85,50 +105,68 @@ class Slider {
 
           if (offset >= 110) {
             clearInterval(interval);
-            this.dotsList
-              .item(this.nearestSlides.curentSlide)
+            this._dotsList
+              .item(this._nearestSlides.curentSlide)
               .classList.remove("dots__dot--active");
             let curent;
             switch (direction) {
               case "left":
-                this.nearestSlides.nextSlide = this.nearestSlides.curentSlide;
-                this.nearestSlides.curentSlide = this.nearestSlides.prevSlide;
+                this._nearestSlides.nextSlide = this._nearestSlides.curentSlide;
+                this._nearestSlides.curentSlide = this._nearestSlides.prevSlide;
 
-                curent = this.nearestSlides.curentSlide;
+                curent = this._nearestSlides.curentSlide;
                 if (curent) {
-                  this.nearestSlides.prevSlide = curent - 1;
+                  this._nearestSlides.prevSlide = curent - 1;
                 } else {
-                  this.nearestSlides.prevSlide = this.slides.length - 1;
+                  this._nearestSlides.prevSlide = this._slides.length - 1;
                 }
 
                 break;
               case "right":
-                this.nearestSlides.prevSlide = this.nearestSlides.curentSlide;
-                this.nearestSlides.curentSlide = this.nearestSlides.nextSlide;
+                this._nearestSlides.prevSlide = this._nearestSlides.curentSlide;
+                this._nearestSlides.curentSlide = this._nearestSlides.nextSlide;
 
-                curent = this.nearestSlides.curentSlide;
-                if (curent === this.slides.length - 1) {
-                  this.nearestSlides.nextSlide = 0;
+                curent = this._nearestSlides.curentSlide;
+                if (curent === this._slides.length - 1) {
+                  this._nearestSlides.nextSlide = 0;
                 } else {
-                  this.nearestSlides.nextSlide = curent + 1;
+                  this._nearestSlides.nextSlide = curent + 1;
                 }
             }
-            this.dotsList.item(curent).classList.add("dots__dot--active");
-            this.animationIsComplite = true;
+            this._dotsList.item(curent).classList.add("dots__dot--active");
+            this._animationIsComplite = true;
             this._plaseSlides();
+            localStorage.setItem("slide", curent);
           }
         });
       }
     };
   };
 }
+const startSlide = localStorage.getItem("slide")
+  ? +localStorage.getItem("slide")
+  : 0;
 
 const slides = document.querySelectorAll(".slider__slide");
 const dots = document.querySelector(".slider__dots");
-const sliderObj = new Slider(slides, dots);
+const sliderObj = new Slider(slides, dots, startSlide);
 
 const leftBtn = document.querySelector("#left-btn");
 const rightBtn = document.querySelector("#right-btn");
 
 leftBtn.addEventListener("click", sliderObj.slideTransition("left"));
 rightBtn.addEventListener("click", sliderObj.slideTransition("right"));
+
+document.addEventListener("keydown", (e) => {
+  switch (e.code) {
+    case "ArrowRight":
+      sliderObj.slideTransition("right")();
+      break;
+    case "ArrowLeft":
+      sliderObj.slideTransition("left")();
+      break;
+    case "Space":
+      sliderObj.slideTransition("right")();
+  }
+  console.log(e.code);
+});
