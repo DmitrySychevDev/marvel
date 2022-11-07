@@ -92,11 +92,7 @@ body {
 }
 .slider__slide img {
   width: 100%;
-  height: auto;
-}
-
-.slider__slide:nth-child(1) {
-  display: block;
+  height: 450px;
 }
 
 .slider__button {
