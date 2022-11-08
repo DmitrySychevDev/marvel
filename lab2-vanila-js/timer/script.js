@@ -4,6 +4,9 @@ const inputs = document.querySelectorAll(".control-input");
 const startBtn = document.querySelector("#start-btn");
 const stopBtn = document.querySelector("#stop-btn");
 const resetBtn = document.querySelector("#reset-btn");
+const oneMinButton = document.querySelector("#set-1min-btn");
+const fiveMinButton = document.querySelector("#set-5min-btn");
+const tenMinButton = document.querySelector("#set-10min-btn");
 
 let timer;
 let isActive = localStorage.getItem("active")
@@ -20,6 +23,9 @@ const manageControls = (flag) => {
     minutesInput.removeAttribute("disabled");
     secondsInput.removeAttribute("disabled");
   }
+  oneMinButton.disabled = flag;
+  fiveMinButton.disabled = flag;
+  tenMinButton.disabled = flag;
 };
 
 const print = (value, target) => {
@@ -33,6 +39,7 @@ const print = (value, target) => {
 const finish = () => {
   document.body.style.backgroundColor = "var(--compliteBg)";
   audio = new Audio("./audio/finish.mp3");
+  audio.play();
   player = setInterval(() => {
     audio.play();
   }, 1000);
@@ -92,7 +99,6 @@ const reset = () => {
 };
 
 if (isActive) {
-  console.log("active");
   tick();
 }
 
@@ -104,6 +110,18 @@ const changeEvent = (e) => {
   if (e.target.value.length === 1) {
     e.target.value = "0" + e.target.value;
   } else if (e.target.value.length === 0) e.target.value = "00";
+  if (+e.target.value > 60) e.target.value = "60";
+  localStorage.setItem("seconds", +secondsInput.value);
+  localStorage.setItem("minutes", +minutesInput.value);
+};
+
+const setTime = (min) => {
+  return () => {
+    print(0, secondsInput);
+    print(min, minutesInput);
+    localStorage.setItem("seconds", 0);
+    localStorage.setItem("minutes", min);
+  };
 };
 
 inputs.forEach((elem) => {
@@ -117,4 +135,8 @@ stopBtn.addEventListener("click", () => {
   localStorage.setItem("active", false);
   stop();
 });
+
 resetBtn.addEventListener("click", reset);
+oneMinButton.addEventListener("click", setTime(1));
+fiveMinButton.addEventListener("click", setTime(5));
+tenMinButton.addEventListener("click", setTime(10));
