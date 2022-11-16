@@ -12,7 +12,7 @@
     "globals": {
       "Atomics": "readonly",
       "SharedArrayBuffer": "readonly"
-    }, 
+    },
     "extends": [
       "airbnb-typescript",
       "airbnb/hooks",
@@ -39,12 +39,18 @@
       "no-console": "off",
       "react-hooks/exhaustive-deps": "off",
       "react/jsx-props-no-spreading": "off",
-      "react/require-default-props": "off",
+      "react/require-default-props": "on",
       "import/no-extraneous-dependencies": "off",
       "react/jsx-indent-props": [2, 2],
       "react/jsx-closing-bracket-location": [2, "tag-aligned"],
       "@typescript-eslint/no-inferrable-types": "off",
       "no-inferrable-types": "off",
-      "import/prefer-default-export": "off"
+      "import/prefer-default-export": "off",
+      "prettier/prettier": [
+        "error",
+        {
+          "endOfLine": "auto"
+        }
+      ]
     }
-}
+  }
