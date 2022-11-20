@@ -1,28 +1,28 @@
 import React from "react";
 
-import { Button, Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
+import { makeStyles } from "tss-react/mui";
 
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { styles } from "./navigation-button.style";
+
+const useStyles = makeStyles()(styles);
 
 const NavigationButton: React.FC<NavigationButtonProps> = ({
   linkTo,
   title,
 }) => {
-  const navigation = useNavigate();
-
+  const { classes } = useStyles(undefined);
   return (
     <Grid item>
-      <Button
-        color="primary"
-        onClick={() => {
-          navigation(linkTo);
-        }}
-        variant="text"
+      <NavLink
+        className={({ isActive }) =>
+          isActive ? classes.activeLink : classes.root
+        }
+        to={linkTo}
       >
-        <Typography variant="body1" sx={{ color: "text.primary" }}>
-          {title}
-        </Typography>
-      </Button>
+        {title}
+      </NavLink>
     </Grid>
   );
 };
