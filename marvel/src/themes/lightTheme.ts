@@ -9,10 +9,13 @@ export const lightTheme: Theme = responsiveFontSizes(
         main: "#e62429",
       },
       secondary: {
-        main: "#909090",
+        main: "#696969",
       },
       warning: {
         main: "#f50057",
+      },
+      text: {
+        primary: "#ffffff",
       },
     },
   })

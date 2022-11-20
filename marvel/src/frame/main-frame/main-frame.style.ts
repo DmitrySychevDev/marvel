@@ -1,11 +1,5 @@
-const headerCollor: string = "#FF0000";
-const contentTheme: string = "#ffffff";
-const footerColor: string = "#393939";
-
 export const styles = {
-  root: {
-    color: contentTheme,
-  },
+  root: {},
   bar: { padding: "20px 30px" },
   header: {
     height: "15vh",
@@ -19,7 +13,6 @@ export const styles = {
   },
   footer: {
     height: "22vh",
-    backgroundColor: footerColor,
     marginTop: 100,
   },
 };

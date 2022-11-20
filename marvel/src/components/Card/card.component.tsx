@@ -10,21 +10,15 @@ import { makeStyles } from "tss-react/mui";
 import { Data } from "../../types";
 import { styles } from "./card.style";
 
-interface CardProps {
-  picture: string;
-  title: string;
-  description: string;
-}
-
 const useStyles = makeStyles()(styles);
 
 const Card = ({ picture, title, description }: CardProps) => {
   const { classes } = useStyles(undefined);
 
   return (
-    <Box border={1} borderColor="secondary.main">
-      <MuiCard className={classes.root}>
-        <CardMedia component="img" height="250" image={picture} alt="item" />
+    <Box border={1} borderColor="secondary.main" className={classes.root}>
+      <MuiCard className={classes.card}>
+        <CardMedia component="img" height="350" image={picture} alt="item" />
         <CardContent>
           <Typography variant="h5" color="primary.main">
             {title}
@@ -37,4 +31,10 @@ const Card = ({ picture, title, description }: CardProps) => {
     </Box>
   );
 };
+
+interface CardProps {
+  picture: string;
+  title: string;
+  description: string;
+}
 export default Card;

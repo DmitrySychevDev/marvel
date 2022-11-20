@@ -14,6 +14,9 @@ export const darkTheme: Theme = responsiveFontSizes(
       warning: {
         main: "#fbfbfb",
       },
+      text: {
+        primary: "#ffffff",
+      },
     },
   })
 );

@@ -6,7 +6,7 @@ import { MainFrame } from "./frame";
 
 const App: React.FC = () => {
   return (
-    <ThemeProvider theme={getDesignToken("dark")}>
+    <ThemeProvider theme={getDesignToken("light")}>
       <CssBaseline />
       <MainFrame />
     </ThemeProvider>
