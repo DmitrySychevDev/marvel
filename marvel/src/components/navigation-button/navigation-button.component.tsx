@@ -13,8 +13,8 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
   return (
     <Grid item>
       <Button
-        color={"primary"}
-        onClick={(e) => {
+        color="primary"
+        onClick={() => {
           navigation(linkTo);
         }}
         variant="text"

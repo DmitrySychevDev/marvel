@@ -1,6 +1,7 @@
 import React from "react";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Grid } from "@mui/material";
 import { Search, Card } from "../../components";
+import { seriesData } from "../../mocks/series-data";
 
 const Series: React.FC = () => {
   return (
@@ -11,9 +12,19 @@ const Series: React.FC = () => {
         color="primary"
         sx={{ marginLeft: "15px", marginBottom: "30px" }}
       >
-        Series
+        Series({seriesData.length})
       </Typography>
       <Search />
+      <Grid container justifyContent="space-around">
+        {seriesData.map((item) => (
+          <Card
+            key={item.id}
+            picture={item.picture}
+            title={item.title}
+            description={item.description}
+          />
+        ))}
+      </Grid>
     </Box>
   );
 };

@@ -7,12 +7,11 @@ import {
   Box,
 } from "@mui/material";
 import { makeStyles } from "tss-react/mui";
-import { Data } from "../../types";
 import { styles } from "./card.style";
 
 const useStyles = makeStyles()(styles);
 
-const Card = ({ picture, title, description }: CardProps) => {
+const Card: React.FC<CardProps> = ({ picture, title, description }) => {
   const { classes } = useStyles(undefined);
 
   return (

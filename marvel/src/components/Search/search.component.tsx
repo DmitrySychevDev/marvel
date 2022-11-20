@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, TextField, Button } from "@mui/material";
-import { styles } from "./search.style";
 import { makeStyles } from "tss-react/mui";
+import { styles } from "./search.style";
 
 const useStyles = makeStyles()(styles);
 

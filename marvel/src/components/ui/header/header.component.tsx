@@ -1,10 +1,10 @@
 import React from "react";
-import { AppBar, Grid, Typography, Link } from "@mui/material";
+import { AppBar, Grid } from "@mui/material";
+import { makeStyles } from "tss-react/mui";
 import MarvelLogo from "../../../assets/marvel-logo.svg";
 import { styles } from "./header.style";
-import { makeStyles } from "tss-react/mui";
 
-import { NavigationButton } from "../../";
+import { NavigationButton } from "../..";
 
 const useStyles = makeStyles()(styles);
 

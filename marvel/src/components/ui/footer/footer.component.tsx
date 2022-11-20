@@ -1,8 +1,8 @@
 import React from "react";
 import { AppBar, Grid, Typography, Link } from "@mui/material";
+import { makeStyles } from "tss-react/mui";
 import MarvelLogo from "../../../assets/marvel-logo.svg";
 import { styles } from "./footer.style";
-import { makeStyles } from "tss-react/mui";
 
 const useStyles = makeStyles()(styles);
 
