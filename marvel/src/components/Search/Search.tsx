@@ -1,12 +1,15 @@
 import React from "react";
+
 import { Grid, TextField, Button } from "@mui/material";
 import { makeStyles } from "tss-react/mui";
-import { styles } from "./search.style";
+
+// Styles
+import { styles } from "./SearchStyle";
 
 const useStyles = makeStyles()(styles);
 
 const Search: React.FC = () => {
-  const { classes } = useStyles(undefined);
+  const { classes } = useStyles();
 
   return (
     <Grid

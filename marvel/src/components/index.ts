@@ -1,5 +1,5 @@
-import { Card } from "./card";
-import { Search } from "./search";
-import { NavigationButton } from "./navigation-button";
+import { Card } from "./Card";
+import { Search } from "./Search";
+import { NavigationButton } from "./NavigationButton";
 
 export { Card, Search, NavigationButton };

@@ -1,9 +1,13 @@
 import React from "react";
-import { Typography, Box, Grid } from "@mui/material";
-import { Search, Card } from "../../components";
-import { comicsData } from "../../mocks/comics-data";
+import { Box, Grid, Typography } from "@mui/material";
 
-const Comics: React.FC = () => {
+// Data
+import { charactersData } from "mocks/characters-data";
+
+// Components
+import { Card, Search } from "components";
+
+const Characters: React.FC = () => {
   return (
     <Box>
       <Typography
@@ -12,11 +16,11 @@ const Comics: React.FC = () => {
         color="primary"
         sx={{ marginLeft: "15px", marginBottom: "30px" }}
       >
-        Comics({comicsData.length})
+        Characters({charactersData.length})
       </Typography>
       <Search />
       <Grid container justifyContent="space-around">
-        {comicsData.map((item) => (
+        {charactersData.map((item) => (
           <Card
             key={item.id}
             picture={item.picture}
@@ -29,4 +33,4 @@ const Comics: React.FC = () => {
   );
 };
 
-export default Comics;
+export default Characters;

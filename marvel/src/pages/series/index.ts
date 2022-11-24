@@ -1,1 +1,1 @@
-export { default as Series } from "./series.component";
+export { default as Series } from "./Series";

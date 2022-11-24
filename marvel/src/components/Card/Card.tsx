@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   Typography,
   Card as MuiCard,
@@ -7,12 +8,20 @@ import {
   Box,
 } from "@mui/material";
 import { makeStyles } from "tss-react/mui";
-import { styles } from "./card.style";
+
+// Styles
+import { styles } from "./CardStyle";
+
+interface CardProps {
+  picture: string;
+  title: string;
+  description: string;
+}
 
 const useStyles = makeStyles()(styles);
 
 const Card: React.FC<CardProps> = ({ picture, title, description }) => {
-  const { classes } = useStyles(undefined);
+  const { classes } = useStyles();
 
   return (
     <Box border={1} borderColor="secondary.main" className={classes.root}>
@@ -31,9 +40,4 @@ const Card: React.FC<CardProps> = ({ picture, title, description }) => {
   );
 };
 
-interface CardProps {
-  picture: string;
-  title: string;
-  description: string;
-}
 export default Card;

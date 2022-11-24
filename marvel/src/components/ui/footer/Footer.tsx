@@ -1,15 +1,20 @@
 import React from "react";
+
 import { AppBar, Grid, Typography, Link } from "@mui/material";
 import { makeStyles } from "tss-react/mui";
+
+// Logo
 import MarvelLogo from "../../../assets/marvel-logo.svg";
-import { styles } from "./footer.style";
+
+// Styles
+import { styles } from "./FooterStyle";
 
 const useStyles = makeStyles()(styles);
 
-const Footer: React.FC = () => {
-  const year: number = new Date().getFullYear();
+const year: number = new Date().getFullYear();
 
-  const { classes } = useStyles(undefined);
+const Footer: React.FC = () => {
+  const { classes } = useStyles();
   return (
     <Grid item>
       <AppBar position="static" color="secondary" className={classes.root}>
@@ -34,4 +39,5 @@ const Footer: React.FC = () => {
     </Grid>
   );
 };
+
 export default Footer;

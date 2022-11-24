@@ -1,1 +1,1 @@
-export { default as Characters } from "./characters.component";
+export { default as Characters } from "./Characters";

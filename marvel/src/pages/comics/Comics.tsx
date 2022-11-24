@@ -1,9 +1,14 @@
 import React from "react";
-import { Typography, Box, Grid } from "@mui/material";
-import { Search, Card } from "../../components";
-import { seriesData } from "../../mocks/series-data";
 
-const Series: React.FC = () => {
+import { Typography, Box, Grid } from "@mui/material";
+
+// Components
+import { Search, Card } from "components";
+
+// Data
+import { comicsData } from "mocks/comics-data";
+
+const Comics: React.FC = () => {
   return (
     <Box>
       <Typography
@@ -12,11 +17,11 @@ const Series: React.FC = () => {
         color="primary"
         sx={{ marginLeft: "15px", marginBottom: "30px" }}
       >
-        Series({seriesData.length})
+        Comics({comicsData.length})
       </Typography>
       <Search />
       <Grid container justifyContent="space-around">
-        {seriesData.map((item) => (
+        {comicsData.map((item) => (
           <Card
             key={item.id}
             picture={item.picture}
@@ -29,4 +34,4 @@ const Series: React.FC = () => {
   );
 };
 
-export default Series;
+export default Comics;

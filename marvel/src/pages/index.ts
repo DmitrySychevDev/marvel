@@ -1,5 +1,5 @@
-import { Characters } from "./characters";
-import { Comics } from "./comics";
-import { Series } from "./series";
+import { Characters } from "./Characters";
+import { Comics } from "./Comics";
+import { Series } from "./Series";
 
 export { Characters, Comics, Series };

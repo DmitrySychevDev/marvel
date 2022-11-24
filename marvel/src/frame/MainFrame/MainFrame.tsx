@@ -1,11 +1,15 @@
 import React from "react";
+
 import { Grid } from "@mui/material";
 import { makeStyles } from "tss-react/mui";
 import { Outlet, RouteObject, useRoutes } from "react-router-dom";
-import { styles } from "./main-frame.style";
 
-import { Characters, Comics, Series } from "../../pages";
-import { Header, Footer } from "../../components/ui";
+// Components
+import { Header, Footer } from "components/ui";
+import { Characters, Comics, Series } from "pages";
+
+// Styles
+import { styles } from "./MainFrameStyles";
 
 const useStyles = makeStyles()(styles);
 

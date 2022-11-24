@@ -1,3 +1,3 @@
-import { MainFrame } from "./main-frame";
+import { MainFrame } from "./MainFrame";
 
 export { MainFrame };

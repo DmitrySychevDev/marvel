@@ -1,12 +1,17 @@
 import React from "react";
+
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { getDesignToken } from "./themes/ThemeManager";
-import { MainFrame } from "./frame";
+
+// Components
+import { MainFrame } from "frame";
+
+// Themes
+import { getDesignToken } from "themes/ThemeManager";
 
 const App: React.FC = () => {
   return (
-    <ThemeProvider theme={getDesignToken("light")}>
+    <ThemeProvider theme={getDesignToken("dark")}>
       <CssBaseline />
       <MainFrame />
     </ThemeProvider>

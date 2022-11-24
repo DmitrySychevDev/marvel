@@ -2,9 +2,15 @@ import React from "react";
 
 import { Grid } from "@mui/material";
 import { makeStyles } from "tss-react/mui";
-
 import { NavLink } from "react-router-dom";
-import { styles } from "./navigation-button.style";
+
+// Styles
+import { styles } from "./NavigationButtonStyle";
+
+interface NavigationButtonProps {
+  linkTo: string;
+  title: string;
+}
 
 const useStyles = makeStyles()(styles);
 
@@ -12,7 +18,7 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
   linkTo,
   title,
 }) => {
-  const { classes } = useStyles(undefined);
+  const { classes } = useStyles();
   return (
     <Grid item>
       <NavLink
@@ -26,10 +32,5 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
     </Grid>
   );
 };
-
-interface NavigationButtonProps {
-  linkTo: string;
-  title: string;
-}
 
 export default NavigationButton;

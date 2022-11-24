@@ -1,1 +1,1 @@
-export { default as Comics } from "./comics.component";
+export { default as Comics } from "./Comics";
