@@ -23,6 +23,7 @@ const Characters: React.FC = () => {
         {charactersData.map((item) => (
           <Card
             key={item.id}
+            id={item.id}
             picture={item.picture}
             title={item.title}
             description={item.description}

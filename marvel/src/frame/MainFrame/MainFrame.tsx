@@ -6,7 +6,14 @@ import { Outlet, RouteObject, useRoutes } from "react-router-dom";
 
 // Components
 import { Header, Footer } from "components/ui";
-import { Characters, Comics, Series } from "pages";
+import {
+  Characters,
+  Comics,
+  Series,
+  CharacterDetails,
+  ComicsDetails,
+  SeriesDetails,
+} from "pages";
 
 // Styles
 import { styles } from "./MainFrameStyles";
@@ -26,6 +33,18 @@ const routes: RouteObject[] = [
       {
         path: "/series",
         element: <Series />,
+      },
+      {
+        path: "/characters/:id",
+        element: <CharacterDetails />,
+      },
+      {
+        path: "/comics/:id",
+        element: <ComicsDetails />,
+      },
+      {
+        path: "/series/:id",
+        element: <SeriesDetails />,
       },
       { path: "*", element: <Characters /> },
     ],

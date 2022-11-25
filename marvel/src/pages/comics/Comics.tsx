@@ -24,6 +24,7 @@ const Comics: React.FC = () => {
         {comicsData.map((item) => (
           <Card
             key={item.id}
+            id={item.id}
             picture={item.picture}
             title={item.title}
             description={item.description}
