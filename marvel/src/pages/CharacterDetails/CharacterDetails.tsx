@@ -48,7 +48,7 @@ const CharactersDetails: React.FC = () => {
                 <Grid container flexDirection="column" spacing={3}>
                   <Grid item>
                     <Typography variant="h5" color="primary">
-                      Comics
+                      Series
                     </Typography>
                     {series.map((item) => (
                       <Grid item>
@@ -68,7 +68,7 @@ const CharactersDetails: React.FC = () => {
                 <Grid container flexDirection="column" spacing={3}>
                   <Grid item>
                     <Typography variant="h5" color="primary">
-                      Series
+                      Comics
                     </Typography>
                     {comics.map((item) => (
                       <Grid item>
