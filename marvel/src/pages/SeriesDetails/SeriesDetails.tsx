@@ -53,6 +53,7 @@ const SeriesDetails: React.FC = () => {
                     {comics.map((item) => (
                       <Grid item>
                         <NavigationButton
+                          key={item.id}
                           title={item.title}
                           linkTo={`/comics/${item.id.substring(7)}`}
                           styleParams={linkStyle}
@@ -73,6 +74,7 @@ const SeriesDetails: React.FC = () => {
                     {characters.map((item) => (
                       <Grid item>
                         <NavigationButton
+                          key={item.id}
                           title={item.title}
                           linkTo={`/characters/${item.id.substring(11)}`}
                           styleParams={linkStyle}

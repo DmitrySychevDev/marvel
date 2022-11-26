@@ -18,17 +18,17 @@ const ComicsDetails: React.FC = () => {
 
   const comics: Comics | undefined = useMemo(() => {
     return comicsData.find((item) => item.id === id);
-  }, [charactersData]);
+  }, [comicsData]);
   const characters: Characters[] = useMemo(() => {
     return comics
       ? charactersData.filter((item) => comics.characters.includes(item.id))
       : [];
-  }, [seriesData]);
+  }, [charactersData]);
   const series: Series[] = useMemo(() => {
     return comics
       ? seriesData.filter((item) => comics.series.includes(item.id))
       : [];
-  }, [comicsData]);
+  }, [seriesData]);
 
   const linkStyle = {
     color: "#4682B4",
@@ -38,6 +38,7 @@ const ComicsDetails: React.FC = () => {
       {comics && (
         <div>
           <Details
+            key={comics.id}
             title={comics.title}
             picture={comics.picture}
             description={comics.description}
@@ -53,6 +54,7 @@ const ComicsDetails: React.FC = () => {
                     {series.map((item) => (
                       <Grid item>
                         <NavigationButton
+                          key={item.id}
                           title={item.title}
                           linkTo={`/series/${item.id.substring(7)}`}
                           styleParams={linkStyle}
@@ -73,6 +75,7 @@ const ComicsDetails: React.FC = () => {
                     {characters.map((item) => (
                       <Grid item>
                         <NavigationButton
+                          key={item.id}
                           title={item.title}
                           linkTo={`/characters/${item.id.substring(11)}`}
                           styleParams={linkStyle}
