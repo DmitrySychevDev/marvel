@@ -16,6 +16,9 @@ const useStyles = makeStyles()(styles);
 
 const Header: React.FC = () => {
   const { classes } = useStyles(undefined);
+  const linkStyle = {
+    color: "#ffffff",
+  };
   return (
     <Grid item>
       <AppBar
@@ -30,9 +33,21 @@ const Header: React.FC = () => {
           </Grid>
           <Grid item>
             <Grid container spacing={2}>
-              <NavigationButton linkTo="/" title="Characters" />
-              <NavigationButton linkTo="/comics" title="Comics" />
-              <NavigationButton linkTo="/series" title="Seriess" />
+              <NavigationButton
+                linkTo="/"
+                title="Characters"
+                styleParams={linkStyle}
+              />
+              <NavigationButton
+                linkTo="/comics"
+                title="Comics"
+                styleParams={linkStyle}
+              />
+              <NavigationButton
+                linkTo="/series"
+                title="Seriess"
+                styleParams={linkStyle}
+              />
             </Grid>
           </Grid>
         </Grid>

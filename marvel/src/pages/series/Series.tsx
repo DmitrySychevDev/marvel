@@ -6,7 +6,7 @@ import { Typography, Box, Grid } from "@mui/material";
 import { Search, Card } from "components";
 
 // Data
-import { seriesData } from "mocks/series-data";
+import { seriesData } from "mocks";
 
 const Series: React.FC = () => {
   return (

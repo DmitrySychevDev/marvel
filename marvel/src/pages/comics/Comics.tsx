@@ -6,7 +6,7 @@ import { Typography, Box, Grid } from "@mui/material";
 import { Search, Card } from "components";
 
 // Data
-import { comicsData } from "mocks/comics-data";
+import { comicsData } from "mocks";
 
 const Comics: React.FC = () => {
   return (

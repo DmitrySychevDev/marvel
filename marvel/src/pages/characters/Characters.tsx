@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
 
 // Data
-import { charactersData } from "mocks/characters-data";
+import { charactersData } from "mocks";
 
 // Components
 import { Card, Search } from "components";
