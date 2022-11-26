@@ -5,6 +5,7 @@ export interface ThemeProps {
 }
 
 const hoverColor: string = "#FFA500";
+
 export const styles = (theme: Theme, params: ThemeProps) => ({
   root: {
     color: params.color,
