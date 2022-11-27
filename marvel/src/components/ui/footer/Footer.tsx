@@ -4,7 +4,7 @@ import { AppBar, Grid, Typography, Link } from "@mui/material";
 import { makeStyles } from "tss-react/mui";
 
 // Logo
-import MarvelLogo from "../../../assets/marvel-logo.svg";
+import MarvelLogo from "assets/marvel-logo.svg";
 
 // Styles
 import { styles } from "./FooterStyle";

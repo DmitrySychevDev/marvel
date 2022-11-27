@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 
-import { AppBar, Grid } from "@mui/material";
+import LightIcon from "@mui/icons-material/Brightness7";
+import DarkIcon from "@mui/icons-material/Brightness4";
+import { AppBar, Grid, IconButton } from "@mui/material";
 import { makeStyles } from "tss-react/mui";
 
 // Components
-import { NavigationButton } from "components";
+import { NavigationButton, ChangeThemeContext } from "components";
 
 // Logo
-import MarvelLogo from "../../../assets/marvel-logo.svg";
+import MarvelLogo from "assets/marvel-logo.svg";
 
 // Styles
 import { styles } from "./HeaderStyle";
@@ -18,6 +20,14 @@ const Header: React.FC = () => {
   const { classes } = useStyles(undefined);
   const linkStyle = {
     color: "#ffffff",
+  };
+
+  const [isLight, setIsLight] = useState<boolean>(true);
+  const toggleTheme = useContext(ChangeThemeContext);
+
+  const changeThemeEvent = () => {
+    toggleTheme();
+    setIsLight((prev) => !prev);
   };
   return (
     <Grid item>
@@ -45,10 +55,15 @@ const Header: React.FC = () => {
               />
               <NavigationButton
                 linkTo="/series"
-                title="Seriess"
+                title="Series"
                 styleParams={linkStyle}
               />
             </Grid>
+          </Grid>
+          <Grid item>
+            <IconButton onClick={changeThemeEvent}>
+              {isLight ? <LightIcon /> : <DarkIcon />}
+            </IconButton>
           </Grid>
         </Grid>
       </AppBar>
