@@ -1,19 +1,16 @@
 import React from "react";
 
 import { Grid } from "@mui/material";
-import { makeStyles } from "tss-react/mui";
 import { NavLink } from "react-router-dom";
 
 // Styles
-import { styles, ThemeProps } from "./NavigationButtonStyle";
+import { useStyles, ThemeProps } from "./NavigationButtonStyle";
 
 interface NavigationButtonProps {
   linkTo: string;
   title: string;
   styleParams: ThemeProps;
 }
-
-const useStyles = makeStyles<ThemeProps>()(styles);
 
 const NavigationButton: React.FC<NavigationButtonProps> = ({
   linkTo,
