@@ -2,8 +2,18 @@ import React, { useState, useContext } from "react";
 
 import LightIcon from "@mui/icons-material/Brightness7";
 import DarkIcon from "@mui/icons-material/Brightness4";
-import { AppBar, Grid, IconButton } from "@mui/material";
+import {
+  AppBar,
+  Grid,
+  IconButton,
+  Box,
+  Select,
+  MenuItem,
+  FormControl,
+  SelectChangeEvent,
+} from "@mui/material";
 import { makeStyles } from "tss-react/mui";
+import { useTranslation } from "react-i18next";
 
 // Components
 import { NavigationButton, ChangeThemeContext } from "components";
@@ -23,11 +33,17 @@ const Header: React.FC = () => {
   };
 
   const [isLight, setIsLight] = useState<boolean>(true);
+  const [lang, setLang] = useState<string>("en");
   const toggleTheme = useContext(ChangeThemeContext);
+  const { t, i18n } = useTranslation();
 
   const changeThemeEvent = () => {
     toggleTheme();
     setIsLight((prev) => !prev);
+  };
+  const changeLang = (e: SelectChangeEvent) => {
+    setLang(e.target.value as string);
+    i18n.changeLanguage(e.target.value);
   };
   return (
     <Grid item>
@@ -45,25 +61,54 @@ const Header: React.FC = () => {
             <Grid container spacing={2}>
               <NavigationButton
                 linkTo="/"
-                title="Characters"
+                title={t("characters")}
                 styleParams={linkStyle}
               />
               <NavigationButton
                 linkTo="/comics"
-                title="Comics"
+                title={t("comics")}
                 styleParams={linkStyle}
               />
               <NavigationButton
                 linkTo="/series"
-                title="Series"
+                title={t("series")}
                 styleParams={linkStyle}
               />
             </Grid>
           </Grid>
           <Grid item>
-            <IconButton onClick={changeThemeEvent}>
-              {isLight ? <LightIcon /> : <DarkIcon />}
-            </IconButton>
+            <Grid container alignItems="center">
+              <Grid item>
+                <IconButton onClick={changeThemeEvent}>
+                  {isLight ? (
+                    <LightIcon sx={{ color: "#ffffff" }} />
+                  ) : (
+                    <DarkIcon />
+                  )}
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <Box sx={{ minWidth: 70, maxHeight: 40 }}>
+                  <FormControl fullWidth>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      displayEmpty
+                      value={lang}
+                      className={classes.selectItems}
+                      onChange={changeLang}
+                    >
+                      <MenuItem sx={{ color: "#e62429" }} value="en">
+                        En
+                      </MenuItem>
+                      <MenuItem sx={{ color: "#e62429" }} value="ru">
+                        Рус
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </AppBar>

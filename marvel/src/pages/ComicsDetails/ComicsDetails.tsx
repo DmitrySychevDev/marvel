@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 
 import { useParams } from "react-router-dom";
 import { Typography, Grid } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 // Components
 import { Details, NavigationButton } from "components";
@@ -15,6 +16,8 @@ import { charactersData, seriesData, comicsData } from "mocks";
 const ComicsDetails: React.FC = () => {
   const params = useParams();
   const id: string = `comics-${params.id}`;
+
+  const { t } = useTranslation();
 
   const comics: Comics | undefined = useMemo(() => {
     return comicsData.find((item) => item.id === id);
@@ -49,12 +52,12 @@ const ComicsDetails: React.FC = () => {
                 <Grid container flexDirection="column" spacing={3}>
                   <Grid item>
                     <Typography variant="h5" color="primary">
-                      Series
+                      {t("comics")}
                     </Typography>
                     {series.map((item) => (
                       <Grid item>
                         <NavigationButton
-                          key={item.id}
+                          key={`${item.id}-from-comics`}
                           title={item.title}
                           linkTo={`/series/${item.id.substring(7)}`}
                           styleParams={linkStyle}
@@ -70,12 +73,12 @@ const ComicsDetails: React.FC = () => {
                 <Grid container flexDirection="column" spacing={3}>
                   <Grid item>
                     <Typography variant="h5" color="primary">
-                      Characters
+                      {t("characters")}
                     </Typography>
                     {characters.map((item) => (
                       <Grid item>
                         <NavigationButton
-                          key={item.id}
+                          key={`${item.id}-from-comics`}
                           title={item.title}
                           linkTo={`/characters/${item.id.substring(11)}`}
                           styleParams={linkStyle}

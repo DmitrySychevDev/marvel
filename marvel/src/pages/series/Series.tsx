@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Typography, Box, Grid } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 // Componets
 import { Search, Card } from "components";
@@ -9,6 +10,7 @@ import { Search, Card } from "components";
 import { seriesData } from "mocks";
 
 const Series: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <Box>
       <Typography
@@ -17,9 +19,9 @@ const Series: React.FC = () => {
         color="primary"
         sx={{ marginLeft: "15px", marginBottom: "30px" }}
       >
-        Series({seriesData.length})
+        {`${t("series")}(${seriesData.length})`}
       </Typography>
-      <Search />
+      <Search searchParams="series" />
       <Grid container justifyContent="space-around">
         {seriesData.map((item) => (
           <Card

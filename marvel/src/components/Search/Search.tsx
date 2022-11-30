@@ -2,14 +2,20 @@ import React from "react";
 
 import { Grid, TextField, Button } from "@mui/material";
 import { makeStyles } from "tss-react/mui";
+import { useTranslation } from "react-i18next";
 
 // Styles
 import { styles } from "./SearchStyle";
 
 const useStyles = makeStyles()(styles);
 
-const Search: React.FC = () => {
+interface SearchProps {
+  searchParams: string;
+}
+
+const Search: React.FC<SearchProps> = ({ searchParams }) => {
   const { classes } = useStyles();
+  const { t } = useTranslation();
 
   return (
     <Grid
@@ -22,12 +28,12 @@ const Search: React.FC = () => {
         <TextField
           className={classes.input}
           variant="outlined"
-          label="Search for Characters by Name"
+          label={t(`${searchParams}Input`)}
         />
       </Grid>
       <Grid item className={classes.buttonWraper}>
         <Button variant="outlined" size="large" className={classes.button}>
-          Search
+          {t("search")}
         </Button>
       </Grid>
     </Grid>

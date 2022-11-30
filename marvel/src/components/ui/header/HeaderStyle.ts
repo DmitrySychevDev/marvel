@@ -9,4 +9,8 @@ export const styles = {
       height: 50,
     },
   },
+  selectItems: {
+    color: "#ffffff",
+    height: 40,
+  },
 };

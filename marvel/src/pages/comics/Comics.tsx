@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Typography, Box, Grid } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 // Components
 import { Search, Card } from "components";
@@ -9,6 +10,7 @@ import { Search, Card } from "components";
 import { comicsData } from "mocks";
 
 const Comics: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <Box>
       <Typography
@@ -17,9 +19,9 @@ const Comics: React.FC = () => {
         color="primary"
         sx={{ marginLeft: "15px", marginBottom: "30px" }}
       >
-        Comics({comicsData.length})
+        {`${t("comics")}(${comicsData.length})`}
       </Typography>
-      <Search />
+      <Search searchParams="comics" />
       <Grid container justifyContent="space-around">
         {comicsData.map((item) => (
           <Card

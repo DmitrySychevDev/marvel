@@ -7,6 +7,9 @@ import { BrowserRouter as Router } from "react-router-dom";
 import App from "App";
 import { ThemeManager } from "components";
 
+// translate
+import "translate/i18Instans";
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Router>

@@ -2,6 +2,7 @@ import React from "react";
 
 import { AppBar, Grid, Typography, Link } from "@mui/material";
 import { makeStyles } from "tss-react/mui";
+import { useTranslation } from "react-i18next";
 
 // Logo
 import MarvelLogo from "assets/marvel-logo.svg";
@@ -15,6 +16,8 @@ const year: number = new Date().getFullYear();
 
 const Footer: React.FC = () => {
   const { classes } = useStyles();
+
+  const { t } = useTranslation();
   return (
     <Grid item>
       <AppBar position="static" color="secondary" className={classes.root}>
@@ -22,7 +25,7 @@ const Footer: React.FC = () => {
           <Grid item className={classes.logo}>
             <img src={MarvelLogo} alt="logo" />
             <Typography variant="body1" component="h3">
-              Data provided by Marvel. © {year} MARVEl
+              {`${t("footerText")} © ${year} MARVEl`}
             </Typography>
             <div>
               <Link
