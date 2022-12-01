@@ -1,22 +1,22 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Theme } from "@mui/system";
+import { observer } from "mobx-react-lite";
 
 // Components
 import { MainFrame } from "frame";
-import { ThemeContext } from "components";
 
-const App: React.FC = () => {
-  const curentTheme: Theme = useContext(ThemeContext);
+// Store
+import { themeStore } from "store";
 
+const App: React.FC = observer(() => {
   return (
-    <ThemeProvider theme={curentTheme}>
+    <ThemeProvider theme={themeStore.theme}>
       <CssBaseline />
       <MainFrame />
     </ThemeProvider>
   );
-};
+});
 
 export default App;

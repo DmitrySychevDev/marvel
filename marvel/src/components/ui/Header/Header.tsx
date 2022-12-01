@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 
 import LightIcon from "@mui/icons-material/Brightness7";
 import DarkIcon from "@mui/icons-material/Brightness4";
@@ -16,10 +16,12 @@ import { makeStyles } from "tss-react/mui";
 import { useTranslation } from "react-i18next";
 
 // Components
-import { NavigationButton, ChangeThemeContext } from "components";
+import { NavigationButton } from "components";
 
 // Logo
 import MarvelLogo from "assets/marvel-logo.svg";
+
+import { themeStore } from "store";
 
 // Styles
 import { styles } from "./HeaderStyle";
@@ -32,13 +34,18 @@ const Header: React.FC = () => {
     color: "#ffffff",
   };
 
-  const [isLight, setIsLight] = useState<boolean>(true);
+  const [isLight, setIsLight] = useState<boolean>(
+    themeStore.theme.palette.mode === "light"
+  );
   const [lang, setLang] = useState<string>("en");
-  const toggleTheme = useContext(ChangeThemeContext);
   const { t, i18n } = useTranslation();
 
   const changeThemeEvent = () => {
-    toggleTheme();
+    if (isLight) {
+      themeStore.setDark();
+    } else {
+      themeStore.setLight();
+    }
     setIsLight((prev) => !prev);
   };
   const changeLang = (e: SelectChangeEvent) => {
