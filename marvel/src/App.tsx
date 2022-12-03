@@ -1,16 +1,22 @@
 import React from "react";
+
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { getDesignToken } from "./themes/ThemeManager";
-import { MainFrame } from "./frame";
+import { observer } from "mobx-react-lite";
 
-const App: React.FC = () => {
+// Components
+import { MainFrame } from "frame";
+
+// Store
+import { themeStore } from "store";
+
+const App: React.FC = observer(() => {
   return (
-    <ThemeProvider theme={getDesignToken("light")}>
+    <ThemeProvider theme={themeStore.theme}>
       <CssBaseline />
       <MainFrame />
     </ThemeProvider>
   );
-};
+});
 
 export default App;
