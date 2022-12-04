@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { observable, action, makeObservable, runInAction } from "mobx";
 import { Theme } from "@mui/system";
 
 // Themes
@@ -6,18 +6,25 @@ import { lightTheme } from "themes/lightTheme";
 import { darkTheme } from "themes/darkTheme";
 
 class ThemeStore {
+  @observable
   theme: Theme = lightTheme;
 
   constructor() {
-    makeAutoObservable(this);
+    makeObservable(this);
   }
 
+  @action
   setDark() {
-    this.theme = darkTheme;
+    runInAction(() => {
+      this.theme = darkTheme;
+    });
   }
 
+  @action
   setLight() {
-    this.theme = lightTheme;
+    runInAction(() => {
+      this.theme = lightTheme;
+    });
   }
 }
 

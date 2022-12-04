@@ -29,6 +29,7 @@ const Search: React.FC<SearchProps> = ({ searchParams }) => {
           className={classes.input}
           variant="outlined"
           label={t(`${searchParams}Input`)}
+          sx={{ "& input": { color: "text.secondary" } }}
         />
       </Grid>
       <Grid item className={classes.buttonWraper}>
