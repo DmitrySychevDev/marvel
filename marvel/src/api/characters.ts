@@ -1,15 +1,9 @@
+// Helper
 import axios from "api/helpers/axios";
-import { CharacterData } from "types/CharacterData";
 
-interface CharactersList {
-  data: {
-    offset: number;
-    limit: number;
-    total: number;
-    count: number;
-    results: CharacterData[];
-  };
-}
+// Types
+import { CharactersList } from "types/CharacterData";
+
 export default {
   async getAllCharacters(
     offsetParam: number,

@@ -1,15 +1,8 @@
+// Helper
 import axios from "api/helpers/axios";
-import { ComicsData } from "types/ComicsData";
 
-interface ComicsList {
-  data: {
-    offset: number;
-    limit: number;
-    total: number;
-    count: number;
-    results: ComicsData[];
-  };
-}
+// Types
+import { ComicsList } from "types/ComicsData";
 
 export default {
   async getAllComics(

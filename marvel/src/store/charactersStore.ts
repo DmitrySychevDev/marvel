@@ -1,23 +1,13 @@
 import { observable, action, makeObservable, runInAction } from "mobx";
 
 // Types
-import { CharacterData } from "types/CharacterData";
+import { CharacterData, CharactersList } from "types/CharacterData";
 
 import { characters } from "api";
 
-interface Characters {
-  data: {
-    offset: number;
-    limit: number;
-    total: number;
-    count: number;
-    results: CharacterData[];
-  };
-}
-
 class CharactersStore {
   @observable
-  characters: Characters = {
+  characters: CharactersList = {
     data: {
       offset: 0,
       limit: 0,

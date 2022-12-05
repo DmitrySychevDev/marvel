@@ -1,23 +1,13 @@
 import { observable, action, makeObservable, runInAction } from "mobx";
 
 // Types
-import { ComicsData } from "types/ComicsData";
+import { ComicsData, ComicsList } from "types/ComicsData";
 
 import { comics } from "api";
 
-interface Comics {
-  data: {
-    offset: number;
-    limit: number;
-    total: number;
-    count: number;
-    results: ComicsData[];
-  };
-}
-
 class ComicsStore {
   @observable
-  comics: Comics = {
+  comics: ComicsList = {
     data: {
       offset: 0,
       limit: 0,
