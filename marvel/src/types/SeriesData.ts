@@ -3,8 +3,9 @@ import { Items } from "./Referense";
 import { ResponseData } from "./ResponseData";
 
 export interface SeriesData extends Data {
+  title: string;
   comics: Items;
-  serie: Items;
+  characters: Items;
 }
 
 interface SeriesResponseData extends ResponseData {

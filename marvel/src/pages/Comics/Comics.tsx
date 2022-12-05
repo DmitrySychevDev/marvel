@@ -8,7 +8,7 @@ import { observer } from "mobx-react-lite";
 import { Search, Card } from "components";
 
 // Store
-import comicsStore from "store/comicsStore";
+import { comicsStore } from "store";
 
 const Comics: React.FC = observer(() => {
   const { t } = useTranslation();

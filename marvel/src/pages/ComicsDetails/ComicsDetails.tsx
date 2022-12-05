@@ -9,7 +9,7 @@ import { observer } from "mobx-react-lite";
 import { Details, NavigationButton } from "components";
 
 // Store
-import comicsStore from "store/comicsStore";
+import { comicsStore } from "store";
 
 const getIdByUrl = (url: string) => {
   const arr = url.split("/");
