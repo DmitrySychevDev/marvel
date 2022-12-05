@@ -41,15 +41,34 @@ class CharactersStore {
   @observable
   loading: boolean = false;
 
+  @observable
+  offset: number = 0;
+
+  @observable
+  searchQuery: string | undefined = undefined;
+
   constructor() {
     makeObservable(this);
   }
 
   @action
-  getCharactersList = async (offset: number): Promise<void> => {
+  setOffset(offsetVal: number) {
+    this.offset = offsetVal;
+  }
+
+  @action
+  setSearchQuery(searchQueryVal: string | undefined) {
+    this.searchQuery = searchQueryVal;
+  }
+
+  @action
+  getCharactersList = async (): Promise<void> => {
     try {
       this.loading = true;
-      const charactersList = await characters.getAllCharacters(offset);
+      const charactersList = await characters.getAllCharacters(
+        this.offset,
+        this.searchQuery
+      );
 
       runInAction(() => {
         this.characters.data = charactersList.data;

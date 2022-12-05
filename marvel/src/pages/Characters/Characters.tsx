@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Box, Grid, Typography, Pagination } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react-lite";
-// Data
-import { charactersData } from "mocks";
 
 // Components
 import { Card, Search } from "components";
@@ -14,13 +12,32 @@ import { charactersStore } from "store";
 
 const Characters: React.FC = observer(() => {
   const { t } = useTranslation();
+  const [page, setPage] = useState<number>(1);
+
   useEffect(() => {
-    charactersStore.getCharactersList(0);
+    charactersStore.getCharactersList();
+    return () => {
+      charactersStore.setOffset(0);
+      charactersStore.setSearchQuery(undefined);
+    };
   }, []);
+  useEffect(() => {
+    charactersStore.getCharactersList();
+  }, [charactersStore.offset, charactersStore.searchQuery]);
+
+  useEffect(() => {
+    setPage(1);
+    charactersStore.setOffset(0);
+  }, [charactersStore.searchQuery]);
+
   const count = charactersStore.characters.data.total ?? 0;
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    charactersStore.getCharactersList((value - 1) * 20);
+    charactersStore.setOffset((value - 1) * 20);
+    setPage(value);
+  };
+  const search = (searchStr: string | undefined) => {
+    charactersStore.setSearchQuery(searchStr);
   };
   return (
     <Box>
@@ -32,12 +49,13 @@ const Characters: React.FC = observer(() => {
       >
         {`${t("characters")}(${charactersStore.characters.data.total})`}
       </Typography>
-      <Search searchParams="characters" />
+      <Search searchParams="characters" searchEvent={search} />
       <Grid container justifyContent="center">
         <Grid item>
           <Pagination
             count={Math.ceil(count / 20)}
             color="primary"
+            page={page}
             onChange={handleChange}
             sx={{
               "& .MuiPagination-ul>li": {

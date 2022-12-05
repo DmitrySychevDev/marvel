@@ -11,9 +11,12 @@ interface CharactersList {
   };
 }
 export default {
-  async getAllCharacters(offset: number): Promise<CharactersList> {
+  async getAllCharacters(
+    offsetParam: number,
+    searchParams: string | undefined
+  ): Promise<CharactersList> {
     const response = await axios.get(`/v1/public/characters`, {
-      params: { offset },
+      params: { offset: offsetParam, nameStartsWith: searchParams },
     });
     return response.data;
   },

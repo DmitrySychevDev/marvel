@@ -21,7 +21,7 @@ const Series: React.FC = () => {
       >
         {`${t("series")}(${seriesData.length})`}
       </Typography>
-      <Search searchParams="series" />
+      <Search searchParams="series" searchEvent={(params: string) => {}} />
       <Grid container justifyContent="space-around">
         {seriesData.map((item) => (
           <Card

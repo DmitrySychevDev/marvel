@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Grid, TextField, Button } from "@mui/material";
 import { makeStyles } from "tss-react/mui";
@@ -11,11 +11,17 @@ const useStyles = makeStyles()(styles);
 
 interface SearchProps {
   searchParams: string;
+  searchEvent: (params: string) => void;
 }
 
-const Search: React.FC<SearchProps> = ({ searchParams }) => {
+const Search: React.FC<SearchProps> = ({ searchParams, searchEvent }) => {
   const { classes } = useStyles();
   const { t } = useTranslation();
+  const [inputValue, setInputValue] = useState<string>("");
+
+  const handleClick = () => {
+    searchEvent(inputValue);
+  };
 
   return (
     <Grid
@@ -30,10 +36,19 @@ const Search: React.FC<SearchProps> = ({ searchParams }) => {
           variant="outlined"
           label={t(`${searchParams}Input`)}
           sx={{ "& input": { color: "text.secondary" } }}
+          value={inputValue}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setInputValue(event.target.value);
+          }}
         />
       </Grid>
       <Grid item className={classes.buttonWraper}>
-        <Button variant="outlined" size="large" className={classes.button}>
+        <Button
+          variant="outlined"
+          size="large"
+          className={classes.button}
+          onClick={handleClick}
+        >
           {t("search")}
         </Button>
       </Grid>

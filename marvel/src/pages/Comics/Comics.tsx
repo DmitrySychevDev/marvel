@@ -21,7 +21,7 @@ const Comics: React.FC = () => {
       >
         {`${t("comics")}(${comicsData.length})`}
       </Typography>
-      <Search searchParams="comics" />
+      <Search searchParams="comics" searchEvent={(params: string) => {}} />
       <Grid container justifyContent="space-around">
         {comicsData.map((item) => (
           <Card
