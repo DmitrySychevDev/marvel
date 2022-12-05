@@ -14,6 +14,7 @@ interface Characters {
     results: CharacterData[];
   };
 }
+
 class CharactersStore {
   @observable
   characters: Characters = {
@@ -27,6 +28,17 @@ class CharactersStore {
   };
 
   @observable
+  character: CharacterData = {
+    id: 0,
+    name: "",
+    description: "",
+    thumbnail: { path: "", extension: "" },
+    resourceURI: "",
+    comics: { items: [] },
+    series: { items: [] },
+  };
+
+  @observable
   loading: boolean = false;
 
   constructor() {
@@ -34,13 +46,31 @@ class CharactersStore {
   }
 
   @action
-  getCharactersList = async (): Promise<void> => {
+  getCharactersList = async (offset: number): Promise<void> => {
     try {
       this.loading = true;
-      const charactersList = await characters.getAllCharacters(10);
+      const charactersList = await characters.getAllCharacters(offset);
 
       runInAction(() => {
         this.characters.data = charactersList.data;
+      });
+    } catch (ex) {
+      console.error(ex);
+    } finally {
+      runInAction(() => {
+        this.loading = false;
+      });
+    }
+  };
+
+  @action
+  getCharacter = async (id: number): Promise<void> => {
+    try {
+      this.loading = true;
+      const character = await characters.getCharacterById(id);
+
+      runInAction(() => {
+        [this.character] = character.data.results;
       });
     } catch (ex) {
       console.error(ex);

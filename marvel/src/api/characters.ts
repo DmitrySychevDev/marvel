@@ -17,4 +17,8 @@ export default {
     });
     return response.data;
   },
+  async getCharacterById(id: number): Promise<CharactersList> {
+    const response = await axios.get(`/v1/public/characters/${id}`);
+    return response.data;
+  },
 };

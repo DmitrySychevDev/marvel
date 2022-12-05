@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography, Pagination } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react-lite";
 // Data
@@ -15,9 +15,13 @@ import { charactersStore } from "store";
 const Characters: React.FC = observer(() => {
   const { t } = useTranslation();
   useEffect(() => {
-    charactersStore.getCharactersList();
+    charactersStore.getCharactersList(0);
   }, []);
+  const count = charactersStore.characters.data.total ?? 0;
 
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    charactersStore.getCharactersList((value - 1) * 20);
+  };
   return (
     <Box>
       <Typography
@@ -26,9 +30,23 @@ const Characters: React.FC = observer(() => {
         color="primary"
         sx={{ marginLeft: "15px", marginBottom: "30px" }}
       >
-        {`${t("characters")}(${charactersData.length})`}
+        {`${t("characters")}(${charactersStore.characters.data.total})`}
       </Typography>
       <Search searchParams="characters" />
+      <Grid container justifyContent="center">
+        <Grid item>
+          <Pagination
+            count={Math.ceil(count / 20)}
+            color="primary"
+            onChange={handleChange}
+            sx={{
+              "& .MuiPagination-ul>li": {
+                "& button": { color: "text.secondary" },
+              },
+            }}
+          />
+        </Grid>
+      </Grid>
       <Grid container justifyContent="space-around">
         {charactersStore.characters?.data?.results.map((item) => (
           <Card

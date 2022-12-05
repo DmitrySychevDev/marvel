@@ -7,4 +7,5 @@ export const russianText = {
   comicsInput: "Поиск комиксов по названию",
   seriesInput: "Поиск фильмов по названию",
   footerText: "Данные предоставленны Marvel.",
+  emptyDescription: "Описание не предаставленно",
 };

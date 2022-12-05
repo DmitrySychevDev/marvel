@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { makeStyles } from "tss-react/mui";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 // Types
 import { Data } from "types";
@@ -22,19 +23,19 @@ const useStyles = makeStyles()(styles);
 const Card: React.FC<Data> = ({ id, picture, title, description }) => {
   const { classes } = useStyles();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const onCardClick: () => void = () => {
-    if (id.includes("characters")) {
-      navigate(`/characters/${id.substring(11)}`);
-    } else if (id.includes("comics")) {
-      navigate(`/comics/${id.substring(7)}`);
-    } else if (id.includes("series")) {
-      navigate(`/series/${id.substring(7)}`);
-    }
+    navigate(`characters/${id}`);
   };
 
   return (
-    <Box border={1} borderColor="secondary.main" className={classes.root}>
+    <Box
+      border={1}
+      borderColor="secondary.main"
+      className={classes.root}
+      sx={{ width: { xs: "90%", sm: "90%", md: "30%", lg: "30%" } }}
+    >
       <CardActionArea>
         <MuiCard className={classes.card} onClick={onCardClick}>
           <CardMedia component="img" height="350" image={picture} alt="item" />
@@ -43,7 +44,7 @@ const Card: React.FC<Data> = ({ id, picture, title, description }) => {
               {title}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {description}
+              {description !== "" ? description : t("emptyDescription")}
             </Typography>
           </CardContent>
         </MuiCard>
