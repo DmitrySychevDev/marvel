@@ -11,7 +11,7 @@ const useStyles = makeStyles()(styles);
 
 interface SearchProps {
   searchParams: string;
-  searchEvent: (params: string) => void;
+  searchEvent: (params: string | undefined) => void;
 }
 
 const Search: React.FC<SearchProps> = ({ searchParams, searchEvent }) => {
@@ -20,7 +20,8 @@ const Search: React.FC<SearchProps> = ({ searchParams, searchEvent }) => {
   const [inputValue, setInputValue] = useState<string>("");
 
   const handleClick = () => {
-    searchEvent(inputValue);
+    if (inputValue) searchEvent(inputValue);
+    else searchEvent(undefined);
   };
 
   return (

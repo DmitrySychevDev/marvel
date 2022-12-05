@@ -1,7 +1,8 @@
 import { Data } from "./Data";
-import { Items } from "./Referense";
+import { Items, Referense } from "./Referense";
 
 export interface ComicsData extends Data {
+  title: string;
   characters: Items;
-  serie: Items;
+  series: Referense | undefined;
 }

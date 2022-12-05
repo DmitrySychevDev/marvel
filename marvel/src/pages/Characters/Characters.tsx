@@ -73,6 +73,7 @@ const Characters: React.FC = observer(() => {
             picture={`${item.thumbnail.path}.${item.thumbnail.extension}`}
             title={item.name}
             description={item.description}
+            type="characters"
           />
         ))}
       </Grid>

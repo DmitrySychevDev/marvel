@@ -1,4 +1,4 @@
-interface Referense {
+export interface Referense {
   resourceURI: string;
   name: string;
 }

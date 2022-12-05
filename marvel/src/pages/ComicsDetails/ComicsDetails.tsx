@@ -1,99 +1,91 @@
-import React, { useMemo } from "react";
+import React, { useEffect } from "react";
 
 import { useParams } from "react-router-dom";
 import { Typography, Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { observer } from "mobx-react-lite";
 
 // Components
 import { Details, NavigationButton } from "components";
 
-// Types
-import { Characters, Series, Comics } from "types";
+// Store
+import comicsStore from "store/comicsStore";
 
-// Data
-import { charactersData, seriesData, comicsData } from "mocks";
+const getIdByUrl = (url: string) => {
+  const arr = url.split("/");
+  return arr[arr.length - 1];
+};
 
-const ComicsDetails: React.FC = () => {
+const ComicsDetails: React.FC = observer(() => {
   const params = useParams();
-  const id: string = `comics-${params.id}`;
+  const idParams: number = params.id ? +params.id : 0;
+  const { title, description, thumbnail, characters, series } =
+    comicsStore.comic;
+  const picture = `${thumbnail.path}.${thumbnail.extension}`;
 
   const { t } = useTranslation();
 
-  const comics: Comics | undefined = useMemo(() => {
-    return comicsData.find((item) => item.id === id);
-  }, [comicsData]);
-  const characters: Characters[] = useMemo(() => {
-    return comics
-      ? charactersData.filter((item) => comics.characters.includes(item.id))
-      : [];
-  }, [charactersData]);
-  const series: Series[] = useMemo(() => {
-    return comics
-      ? seriesData.filter((item) => comics.series.includes(item.id))
-      : [];
-  }, [seriesData]);
+  useEffect(() => {
+    comicsStore.getComic(idParams);
+  }, []);
 
   const linkStyle = {
     color: "#4682B4",
   };
   return (
     <div>
-      {comics && (
-        <div>
-          <Details
-            key={comics.id}
-            title={comics.title}
-            picture={comics.picture}
-            description={comics.description}
-          />
-          <Grid container justifyContent="space-around">
-            {!!series.length && (
-              <Grid item>
-                <Grid container flexDirection="column" spacing={3}>
+      <div>
+        <Details
+          key={idParams}
+          title={title}
+          picture={picture}
+          description={description}
+        />
+        <Grid container justifyContent="space-around">
+          {series && (
+            <Grid item>
+              <Grid container flexDirection="column" spacing={3}>
+                <Grid item>
+                  <Typography variant="h5" color="primary">
+                    {t("series")}
+                  </Typography>
                   <Grid item>
-                    <Typography variant="h5" color="primary">
-                      {t("comics")}
-                    </Typography>
-                    {series.map((item) => (
-                      <Grid item>
-                        <NavigationButton
-                          key={`${item.id}-from-comics`}
-                          title={item.title}
-                          linkTo={`/series/${item.id.substring(7)}`}
-                          styleParams={linkStyle}
-                        />
-                      </Grid>
-                    ))}
+                    <NavigationButton
+                      key={`${getIdByUrl(series.resourceURI)}`}
+                      title={series.name}
+                      linkTo={`/series/${getIdByUrl(series.resourceURI)}`}
+                      styleParams={linkStyle}
+                    />
                   </Grid>
                 </Grid>
               </Grid>
-            )}
-            {!!characters.length && (
-              <Grid item>
-                <Grid container flexDirection="column" spacing={3}>
-                  <Grid item>
-                    <Typography variant="h5" color="primary">
-                      {t("characters")}
-                    </Typography>
-                    {characters.map((item) => (
-                      <Grid item>
-                        <NavigationButton
-                          key={`${item.id}-from-comics`}
-                          title={item.title}
-                          linkTo={`/characters/${item.id.substring(11)}`}
-                          styleParams={linkStyle}
-                        />
-                      </Grid>
-                    ))}
-                  </Grid>
+            </Grid>
+          )}
+          {!!characters?.items?.length && (
+            <Grid item>
+              <Grid container flexDirection="column" spacing={3}>
+                <Grid item>
+                  <Typography variant="h5" color="primary">
+                    {t("characters")}
+                  </Typography>
+                  {characters.items.map((item) => (
+                    <Grid item>
+                      <NavigationButton
+                        key={`${getIdByUrl(item.resourceURI)}`}
+                        title={item.name}
+                        linkTo={`/characters/${getIdByUrl(item.resourceURI)}`}
+                        styleParams={linkStyle}
+                      />
+                    </Grid>
+                  ))}
                 </Grid>
               </Grid>
-            )}
-          </Grid>
-        </div>
-      )}
+            </Grid>
+          )}
+        </Grid>
+      </div>
     </div>
   );
-};
+});
 
 export default ComicsDetails;

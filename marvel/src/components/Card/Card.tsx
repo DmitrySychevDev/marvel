@@ -18,15 +18,25 @@ import { Data } from "types";
 // Styles
 import { styles } from "./CardStyle";
 
+interface CardProps extends Data {
+  type: string;
+}
+
 const useStyles = makeStyles()(styles);
 
-const Card: React.FC<Data> = ({ id, picture, title, description }) => {
+const Card: React.FC<CardProps> = ({
+  id,
+  picture,
+  title,
+  description,
+  type,
+}) => {
   const { classes } = useStyles();
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   const onCardClick: () => void = () => {
-    navigate(`characters/${id}`);
+    navigate(`/${type}/${id}`);
   };
 
   return (

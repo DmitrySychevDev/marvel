@@ -21,7 +21,10 @@ const Series: React.FC = () => {
       >
         {`${t("series")}(${seriesData.length})`}
       </Typography>
-      <Search searchParams="series" searchEvent={(params: string) => {}} />
+      <Search
+        searchParams="series"
+        searchEvent={(params: string | undefined) => {}}
+      />
       <Grid container justifyContent="space-around">
         {seriesData.map((item) => (
           <Card
@@ -30,6 +33,7 @@ const Series: React.FC = () => {
             picture={item.picture}
             title={item.title}
             description={item.description}
+            type="series"
           />
         ))}
       </Grid>
