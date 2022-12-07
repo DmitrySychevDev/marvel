@@ -32,6 +32,9 @@ class ComicsStore {
   loading: boolean = false;
 
   @observable
+  error: boolean = false;
+
+  @observable
   offset: number = 0;
 
   @observable
@@ -62,9 +65,13 @@ class ComicsStore {
 
       runInAction(() => {
         this.comics.data = comicsList.data;
+        this.error = false;
       });
     } catch (ex) {
       console.error(ex);
+      runInAction(() => {
+        this.error = true;
+      });
     } finally {
       runInAction(() => {
         this.loading = false;
@@ -80,9 +87,12 @@ class ComicsStore {
 
       runInAction(() => {
         [this.comic] = comic.data.results;
+        this.error = false;
       });
     } catch (ex) {
-      console.error(ex);
+      runInAction(() => {
+        this.error = true;
+      });
     } finally {
       runInAction(() => {
         this.loading = false;

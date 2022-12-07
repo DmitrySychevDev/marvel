@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-import { Typography, Box, Grid, Pagination } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Grid,
+  Pagination,
+  CircularProgress,
+  Alert,
+} from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react-lite";
 
@@ -41,42 +48,70 @@ const Series: React.FC = observer(() => {
   };
   return (
     <Box>
-      <Typography
-        variant="h2"
-        component="h2"
-        color="primary"
-        sx={{ marginLeft: "15px", marginBottom: "30px" }}
-      >
-        {`${t("series")}(${count})`}
-      </Typography>
-      <Search searchParams="series" searchEvent={search} />
-      <Grid container justifyContent="center">
-        <Grid item>
-          <Pagination
-            count={Math.ceil(count / 20)}
+      {!seriesStore.error && (
+        <Box>
+          <Typography
+            variant="h2"
+            component="h2"
             color="primary"
-            page={page}
-            onChange={handleChange}
-            sx={{
-              "& .MuiPagination-ul>li": {
-                "& button": { color: "text.secondary" },
-              },
-            }}
-          />
+            sx={{ marginLeft: "15px", marginBottom: "30px" }}
+          >
+            {`${t("series")}(${count})`}
+          </Typography>
+          <Search searchParams="series" searchEvent={search} />
+          {!seriesStore.loading && (
+            <Box>
+              {count ? (
+                <Box>
+                  <Grid container justifyContent="center">
+                    <Grid item>
+                      <Pagination
+                        count={Math.ceil(count / 20)}
+                        color="primary"
+                        page={page}
+                        onChange={handleChange}
+                        sx={{
+                          "& .MuiPagination-ul>li": {
+                            "& button": { color: "text.secondary" },
+                          },
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
+                  <Grid container justifyContent="space-around">
+                    {seriesStore.seriesList.data.results.map((item) => (
+                      <Card
+                        key={item.id}
+                        id={item.id.toString()}
+                        picture={`${item.thumbnail.path}.${item.thumbnail.extension}`}
+                        title={item.title}
+                        description={item.description}
+                        type="series"
+                      />
+                    ))}
+                  </Grid>
+                </Box>
+              ) : (
+                <Typography
+                  variant="h2"
+                  color="primary"
+                  sx={{ marginLeft: "15px" }}
+                >
+                  {`${t("series")} ${t("notFound")}`}
+                </Typography>
+              )}
+            </Box>
+          )}
+        </Box>
+      )}
+      {seriesStore.loading && (
+        <Grid container justifyContent="center">
+          <Grid item>
+            <CircularProgress />
+          </Grid>
         </Grid>
-      </Grid>
-      <Grid container justifyContent="space-around">
-        {seriesStore.seriesList.data.results.map((item) => (
-          <Card
-            key={item.id}
-            id={item.id.toString()}
-            picture={`${item.thumbnail.path}.${item.thumbnail.extension}`}
-            title={item.title}
-            description={item.description}
-            type="series"
-          />
-        ))}
-      </Grid>
+      )}
+      {seriesStore.error && <Alert severity="error">{t("error")}</Alert>}
     </Box>
   );
 });

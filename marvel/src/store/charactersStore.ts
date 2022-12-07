@@ -32,6 +32,9 @@ class CharactersStore {
   loading: boolean = false;
 
   @observable
+  error: boolean = false;
+
+  @observable
   offset: number = 0;
 
   @observable
@@ -62,9 +65,13 @@ class CharactersStore {
 
       runInAction(() => {
         this.characters.data = charactersList.data;
+        this.error = false;
       });
     } catch (ex) {
       console.error(ex);
+      runInAction(() => {
+        this.error = true;
+      });
     } finally {
       runInAction(() => {
         this.loading = false;
@@ -80,9 +87,13 @@ class CharactersStore {
 
       runInAction(() => {
         [this.character] = character.data.results;
+        this.error = false;
       });
     } catch (ex) {
       console.error(ex);
+      runInAction(() => {
+        this.error = true;
+      });
     } finally {
       runInAction(() => {
         this.loading = false;

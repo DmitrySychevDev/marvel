@@ -8,4 +8,6 @@ export const englishText = {
   seriesInput: "Search for Series by Name",
   footerText: "Data provided by Marvel.",
   emptyDescription: "Description not provided",
+  notFound: "not found",
+  error: "Getting data error",
 };

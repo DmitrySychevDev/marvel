@@ -32,6 +32,9 @@ class SeriesStore {
   loading: boolean = false;
 
   @observable
+  error: boolean = false;
+
+  @observable
   offset: number = 0;
 
   @observable
@@ -62,9 +65,13 @@ class SeriesStore {
 
       runInAction(() => {
         this.seriesList.data = seriesResp.data;
+        this.error = false;
       });
     } catch (ex) {
       console.error(ex);
+      runInAction(() => {
+        this.error = true;
+      });
     } finally {
       runInAction(() => {
         this.loading = false;
@@ -82,6 +89,9 @@ class SeriesStore {
         [this.series] = seriesResp.data.results;
       });
     } catch (ex) {
+      runInAction(() => {
+        this.error = true;
+      });
       console.error(ex);
     } finally {
       runInAction(() => {

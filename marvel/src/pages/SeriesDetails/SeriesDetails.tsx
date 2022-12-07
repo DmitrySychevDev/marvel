@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import { useParams } from "react-router-dom";
-import { Typography, Grid } from "@mui/material";
+import { Typography, Grid, Alert } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react-lite";
 
@@ -34,7 +34,7 @@ const SeriesDetails: React.FC = observer(() => {
   };
   return (
     <div>
-      {seriesStore.series && (
+      {!seriesStore.error ? (
         <div>
           <Details title={title} picture={picture} description={description} />
           <Grid container justifyContent="space-around">
@@ -82,6 +82,8 @@ const SeriesDetails: React.FC = observer(() => {
             )}
           </Grid>
         </div>
+      ) : (
+        <Alert severity="error">{t("error")}</Alert>
       )}
     </div>
   );

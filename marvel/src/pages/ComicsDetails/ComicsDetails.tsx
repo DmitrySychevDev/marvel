@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import { useParams } from "react-router-dom";
-import { Typography, Grid } from "@mui/material";
+import { Typography, Grid, Alert } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react-lite";
 
@@ -34,56 +34,60 @@ const ComicsDetails: React.FC = observer(() => {
   };
   return (
     <div>
-      <div>
-        <Details
-          key={idParams}
-          title={title}
-          picture={picture}
-          description={description}
-        />
-        <Grid container justifyContent="space-around">
-          {series && (
-            <Grid item>
-              <Grid container flexDirection="column" spacing={3}>
-                <Grid item>
-                  <Typography variant="h5" color="primary">
-                    {t("series")}
-                  </Typography>
+      {!comicsStore.error ? (
+        <div>
+          <Details
+            key={idParams}
+            title={title}
+            picture={picture}
+            description={description}
+          />
+          <Grid container justifyContent="space-around">
+            {series && (
+              <Grid item>
+                <Grid container flexDirection="column" spacing={3}>
                   <Grid item>
-                    <NavigationButton
-                      key={`${getIdByUrl(series.resourceURI)}`}
-                      title={series.name}
-                      linkTo={`/series/${getIdByUrl(series.resourceURI)}`}
-                      styleParams={linkStyle}
-                    />
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Grid>
-          )}
-          {!!characters?.items?.length && (
-            <Grid item>
-              <Grid container flexDirection="column" spacing={3}>
-                <Grid item>
-                  <Typography variant="h5" color="primary">
-                    {t("characters")}
-                  </Typography>
-                  {characters.items.map((item) => (
+                    <Typography variant="h5" color="primary">
+                      {t("series")}
+                    </Typography>
                     <Grid item>
                       <NavigationButton
-                        key={`${getIdByUrl(item.resourceURI)}`}
-                        title={item.name}
-                        linkTo={`/characters/${getIdByUrl(item.resourceURI)}`}
+                        key={`${getIdByUrl(series.resourceURI)}`}
+                        title={series.name}
+                        linkTo={`/series/${getIdByUrl(series.resourceURI)}`}
                         styleParams={linkStyle}
                       />
                     </Grid>
-                  ))}
+                  </Grid>
                 </Grid>
               </Grid>
-            </Grid>
-          )}
-        </Grid>
-      </div>
+            )}
+            {!!characters?.items?.length && (
+              <Grid item>
+                <Grid container flexDirection="column" spacing={3}>
+                  <Grid item>
+                    <Typography variant="h5" color="primary">
+                      {t("characters")}
+                    </Typography>
+                    {characters.items.map((item) => (
+                      <Grid item>
+                        <NavigationButton
+                          key={`${getIdByUrl(item.resourceURI)}`}
+                          title={item.name}
+                          linkTo={`/characters/${getIdByUrl(item.resourceURI)}`}
+                          styleParams={linkStyle}
+                        />
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Grid>
+              </Grid>
+            )}
+          </Grid>
+        </div>
+      ) : (
+        <Alert severity="error">{t("error")}</Alert>
+      )}
     </div>
   );
 });

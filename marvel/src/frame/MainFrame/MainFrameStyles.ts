@@ -1,5 +1,7 @@
 export const styles = {
-  root: {},
+  root: {
+    minHeight: "100vh",
+  },
   bar: { padding: "20px 30px" },
   header: {
     height: "15vh",
