@@ -5,7 +5,7 @@ import {
   Card as MuiCard,
   CardMedia,
   CardContent,
-  Box,
+  Grid,
   CardActionArea,
 } from "@mui/material";
 import { makeStyles } from "tss-react/mui";
@@ -40,14 +40,13 @@ const Card: React.FC<CardProps> = ({
   };
 
   return (
-    <Box
-      border={1}
-      borderColor="secondary.main"
+    <Grid
+      item
+      sx={{ width: { lg: "30%", md: "30%", sm: "45%", xs: "70%" } }}
       className={classes.root}
-      sx={{ width: { xs: "90%", sm: "90%", md: "30%", lg: "30%" } }}
     >
-      <CardActionArea>
-        <MuiCard className={classes.card} onClick={onCardClick}>
+      <CardActionArea sx={{ height: "100%" }}>
+        <MuiCard onClick={onCardClick} className={classes.card}>
           <CardMedia component="img" height="350" image={picture} alt="item" />
           <CardContent>
             <Typography variant="h5" color="primary.main">
@@ -59,7 +58,7 @@ const Card: React.FC<CardProps> = ({
           </CardContent>
         </MuiCard>
       </CardActionArea>
-    </Box>
+    </Grid>
   );
 };
 

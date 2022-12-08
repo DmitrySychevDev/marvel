@@ -35,6 +35,7 @@ const Characters: React.FC = observer(() => {
   useEffect(() => {
     setPage(1);
     charactersStore.setOffset(0);
+    console.log("searchQuery");
   }, [charactersStore.searchQuery]);
 
   const count = charactersStore.characters.data.total ?? 0;

@@ -1,6 +1,6 @@
 export const styles = {
   card: {
-    minHeight: "700px",
+    height: "100%",
   },
   root: {
     marginTop: "40px",

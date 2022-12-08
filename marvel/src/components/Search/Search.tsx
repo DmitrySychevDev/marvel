@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useMemo, useEffect } from "react";
 
-import { Grid, TextField, Button } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import { makeStyles } from "tss-react/mui";
 import { useTranslation } from "react-i18next";
+import debouce from "lodash.debounce";
 
 // Styles
 import { styles } from "./SearchStyle";
@@ -17,12 +18,22 @@ interface SearchProps {
 const Search: React.FC<SearchProps> = ({ searchParams, searchEvent }) => {
   const { classes } = useStyles();
   const { t } = useTranslation();
-  const [inputValue, setInputValue] = useState<string>("");
 
-  const handleClick = () => {
-    if (inputValue) searchEvent(inputValue);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    if (val) searchEvent(val);
     else searchEvent(undefined);
   };
+
+  const debouncedResults = useMemo(() => {
+    return debouce(handleChange, 2000);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      debouncedResults.cancel();
+    };
+  });
 
   return (
     <Grid
@@ -37,21 +48,8 @@ const Search: React.FC<SearchProps> = ({ searchParams, searchEvent }) => {
           variant="outlined"
           label={t(`${searchParams}Input`)}
           sx={{ "& input": { color: "text.secondary" } }}
-          value={inputValue}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setInputValue(event.target.value);
-          }}
+          onChange={debouncedResults}
         />
-      </Grid>
-      <Grid item className={classes.buttonWraper}>
-        <Button
-          variant="outlined"
-          size="large"
-          className={classes.button}
-          onClick={handleClick}
-        >
-          {t("search")}
-        </Button>
       </Grid>
     </Grid>
   );
