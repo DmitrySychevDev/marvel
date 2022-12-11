@@ -1,64 +1,56 @@
-import React, { useMemo } from "react";
+import React, { useEffect } from "react";
 
 import { useParams } from "react-router-dom";
-import { Typography, Grid } from "@mui/material";
+import { Typography, Grid, Alert } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { observer } from "mobx-react-lite";
 
 // Components
 import { Details, NavigationButton } from "components";
 
-// Types
-import { Characters, Series, Comics } from "types";
+// Store
+import { seriesStore } from "store";
 
-// Data
-import { charactersData, seriesData, comicsData } from "mocks";
+const getIdByUrl = (url: string) => {
+  const arr = url.split("/");
+  return arr[arr.length - 1];
+};
 
-const SeriesDetails: React.FC = () => {
+const SeriesDetails: React.FC = observer(() => {
   const params = useParams();
-  const id: string = `series-${params.id}`;
+  const idParams: number = params.id ? +params.id : 0;
+  const { title, description, thumbnail, comics, characters } =
+    seriesStore.series;
+  const picture = `${thumbnail.path}.${thumbnail.extension}`;
 
   const { t } = useTranslation();
 
-  const series: Series | undefined = useMemo(() => {
-    return seriesData.find((item) => item.id === id);
-  }, [seriesData]);
-  const characters: Characters[] = useMemo(() => {
-    return series
-      ? charactersData.filter((item) => series.characters.includes(item.id))
-      : [];
-  }, [charactersData]);
-  const comics: Comics[] = useMemo(() => {
-    return series
-      ? comicsData.filter((item) => series.comics.includes(item.id))
-      : [];
-  }, [comicsData]);
+  useEffect(() => {
+    seriesStore.getSeries(idParams);
+  }, []);
 
   const linkStyle = {
     color: "#4682B4",
   };
   return (
     <div>
-      {series && (
+      {!seriesStore.error ? (
         <div>
-          <Details
-            title={series.title}
-            picture={series.picture}
-            description={series.description}
-          />
+          <Details title={title} picture={picture} description={description} />
           <Grid container justifyContent="space-around">
-            {!!comics.length && (
+            {!!comics.items.length && (
               <Grid item>
                 <Grid container flexDirection="column" spacing={3}>
                   <Grid item>
                     <Typography variant="h5" color="primary">
                       {t("comics")}
                     </Typography>
-                    {comics.map((item) => (
+                    {comics.items.map((item) => (
                       <Grid item>
                         <NavigationButton
-                          key={`${item.id}-from-series`}
-                          title={item.title}
-                          linkTo={`/comics/${item.id.substring(7)}`}
+                          key={getIdByUrl(item.resourceURI)}
+                          title={item.name}
+                          linkTo={`/comics/${getIdByUrl(item.resourceURI)}`}
                           styleParams={linkStyle}
                         />
                       </Grid>
@@ -67,19 +59,19 @@ const SeriesDetails: React.FC = () => {
                 </Grid>
               </Grid>
             )}
-            {!!characters.length && (
+            {!!characters.items.length && (
               <Grid item>
                 <Grid container flexDirection="column" spacing={3}>
                   <Grid item>
                     <Typography variant="h5" color="primary">
                       {t("characters")}
                     </Typography>
-                    {characters.map((item) => (
+                    {characters.items.map((item) => (
                       <Grid item>
                         <NavigationButton
-                          key={`${item.id}-from-series`}
-                          title={item.title}
-                          linkTo={`/characters/${item.id.substring(11)}`}
+                          key={getIdByUrl(item.resourceURI)}
+                          title={item.name}
+                          linkTo={`/characters/${getIdByUrl(item.resourceURI)}`}
                           styleParams={linkStyle}
                         />
                       </Grid>
@@ -90,9 +82,11 @@ const SeriesDetails: React.FC = () => {
             )}
           </Grid>
         </div>
+      ) : (
+        <Alert severity="error">{t("error")}</Alert>
       )}
     </div>
   );
-};
+});
 
 export default SeriesDetails;
