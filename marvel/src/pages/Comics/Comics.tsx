@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 import {
   Typography,
@@ -6,16 +6,16 @@ import {
   Grid,
   Pagination,
   CircularProgress,
-  Alert,
-} from "@mui/material";
-import { useTranslation } from "react-i18next";
-import { observer } from "mobx-react-lite";
+  Alert
+} from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { observer } from 'mobx-react-lite';
 
 // Components
-import { Search, Card } from "components";
+import { Search, Card } from 'components';
 
 // Store
-import { comicsStore } from "store";
+import { comicsStore } from 'store';
 
 const Comics: React.FC = observer(() => {
   const { t } = useTranslation();
@@ -54,9 +54,9 @@ const Comics: React.FC = observer(() => {
             variant="h2"
             component="h2"
             color="primary"
-            sx={{ marginLeft: "15px", marginBottom: "30px" }}
+            sx={{ marginLeft: '15px', marginBottom: '30px' }}
           >
-            {`${t("comics")}(${count})`}
+            {`${t('comics')}(${count})`}
           </Typography>
           <Search searchParams="comics" searchEvent={search} />
           {!comicsStore.loading && (
@@ -71,9 +71,9 @@ const Comics: React.FC = observer(() => {
                         page={page}
                         onChange={handleChange}
                         sx={{
-                          "& .MuiPagination-ul>li": {
-                            "& button": { color: "text.secondary" },
-                          },
+                          '& .MuiPagination-ul>li': {
+                            '& button': { color: 'text.secondary' }
+                          }
                         }}
                       />
                     </Grid>
@@ -95,9 +95,9 @@ const Comics: React.FC = observer(() => {
                 <Typography
                   variant="h2"
                   color="primary"
-                  sx={{ marginLeft: "15px" }}
+                  sx={{ marginLeft: '15px' }}
                 >
-                  {`${t("comics")} ${t("notFound")}`}
+                  {`${t('comics')} ${t('notFound')}`}
                 </Typography>
               )}
             </Box>
@@ -111,7 +111,7 @@ const Comics: React.FC = observer(() => {
           </Grid>
         </Grid>
       )}
-      {comicsStore.error && <Alert severity="error">{t("error")}</Alert>}
+      {comicsStore.error && <Alert severity="error">{t('error')}</Alert>}
     </Box>
   );
 });

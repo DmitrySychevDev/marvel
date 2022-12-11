@@ -1,22 +1,22 @@
-import { Theme } from "@mui/system";
-import { createTheme, responsiveFontSizes } from "@mui/material";
+import { Theme } from '@mui/system';
+import { createTheme, responsiveFontSizes } from '@mui/material';
 
 export const darkTheme: Theme = responsiveFontSizes(
   createTheme({
     palette: {
-      mode: "dark",
+      mode: 'dark',
       primary: {
-        main: "#e62429",
+        main: '#e62429'
       },
       secondary: {
-        main: "#909090",
+        main: '#909090'
       },
       warning: {
-        main: "#fbfbfb",
+        main: '#fbfbfb'
       },
       text: {
-        primary: "#ffffff",
-      },
-    },
+        primary: '#ffffff'
+      }
+    }
   })
 );

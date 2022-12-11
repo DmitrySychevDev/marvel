@@ -1,6 +1,6 @@
-import { Data } from "./Data";
-import { Items } from "./Referense";
-import { ResponseData } from "./ResponseData";
+import { Data } from './Data';
+import { Items } from './Referense';
+import { ResponseData } from './ResponseData';
 
 export interface CharacterData extends Data {
   name: string;

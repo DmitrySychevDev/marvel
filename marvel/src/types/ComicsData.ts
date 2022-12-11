@@ -1,6 +1,6 @@
-import { Data } from "./Data";
-import { Items, Referense } from "./Referense";
-import { ResponseData } from "./ResponseData";
+import { Data } from './Data';
+import { Items, Referense } from './Referense';
+import { ResponseData } from './ResponseData';
 
 export interface ComicsData extends Data {
   title: string;

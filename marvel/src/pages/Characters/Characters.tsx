@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 import {
   Box,
@@ -6,16 +6,16 @@ import {
   Typography,
   Pagination,
   CircularProgress,
-  Alert,
-} from "@mui/material";
-import { useTranslation } from "react-i18next";
-import { observer } from "mobx-react-lite";
+  Alert
+} from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { observer } from 'mobx-react-lite';
 
 // Components
-import { Card, Search } from "components";
+import { Card, Search } from 'components';
 
 // Store
-import { charactersStore } from "store";
+import { charactersStore } from 'store';
 
 const Characters: React.FC = observer(() => {
   const { t } = useTranslation();
@@ -35,7 +35,7 @@ const Characters: React.FC = observer(() => {
   useEffect(() => {
     setPage(1);
     charactersStore.setOffset(0);
-    console.log("searchQuery");
+    console.log('searchQuery');
   }, [charactersStore.searchQuery]);
 
   const count = charactersStore.characters.data.total ?? 0;
@@ -56,9 +56,9 @@ const Characters: React.FC = observer(() => {
             variant="h2"
             component="h2"
             color="primary"
-            sx={{ marginLeft: "15px", marginBottom: "30px" }}
+            sx={{ marginLeft: '15px', marginBottom: '30px' }}
           >
-            {`${t("characters")}(${charactersStore.characters.data.total})`}
+            {`${t('characters')}(${charactersStore.characters.data.total})`}
           </Typography>
           <Search searchParams="characters" searchEvent={search} />
           {!charactersStore.loading && (
@@ -73,9 +73,9 @@ const Characters: React.FC = observer(() => {
                         page={page}
                         onChange={handleChange}
                         sx={{
-                          "& .MuiPagination-ul>li": {
-                            "& button": { color: "text.secondary" },
-                          },
+                          '& .MuiPagination-ul>li': {
+                            '& button': { color: 'text.secondary' }
+                          }
                         }}
                       />
                     </Grid>
@@ -97,9 +97,9 @@ const Characters: React.FC = observer(() => {
                 <Typography
                   variant="h2"
                   color="primary"
-                  sx={{ marginLeft: "15px" }}
+                  sx={{ marginLeft: '15px' }}
                 >
-                  {`${t("characters")} ${t("notFound")}`}
+                  {`${t('characters')} ${t('notFound')}`}
                 </Typography>
               )}
             </Box>
@@ -113,7 +113,7 @@ const Characters: React.FC = observer(() => {
           </Grid>
         </Grid>
       )}
-      {charactersStore.error && <Alert severity="error">{t("error")}</Alert>}
+      {charactersStore.error && <Alert severity="error">{t('error')}</Alert>}
     </Box>
   );
 });

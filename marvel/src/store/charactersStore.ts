@@ -1,9 +1,10 @@
-import { observable, action, makeObservable, runInAction } from "mobx";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { observable, action, makeObservable, runInAction } from 'mobx';
 
 // Types
-import { CharacterData, CharactersList } from "types/CharacterData";
+import { CharacterData, CharactersList } from 'types/CharacterData';
 
-import { characters } from "api";
+import { characters } from 'api';
 
 class CharactersStore {
   @observable
@@ -13,19 +14,19 @@ class CharactersStore {
       limit: 0,
       total: 0,
       count: 0,
-      results: [],
-    },
+      results: []
+    }
   };
 
   @observable
   character: CharacterData = {
     id: 0,
-    name: "",
-    description: "",
-    thumbnail: { path: "", extension: "" },
-    resourceURI: "",
+    name: '',
+    description: '',
+    thumbnail: { path: '', extension: '' },
+    resourceURI: '',
     comics: { items: [] },
-    series: { items: [] },
+    series: { items: [] }
   };
 
   @observable

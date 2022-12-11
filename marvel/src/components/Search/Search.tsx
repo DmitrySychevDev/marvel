@@ -1,12 +1,12 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo, useEffect } from 'react';
 
-import { Grid, TextField } from "@mui/material";
-import { makeStyles } from "tss-react/mui";
-import { useTranslation } from "react-i18next";
-import debouce from "lodash.debounce";
+import { Grid, TextField } from '@mui/material';
+import { makeStyles } from 'tss-react/mui';
+import { useTranslation } from 'react-i18next';
+import debouce from 'lodash.debounce';
 
 // Styles
-import { styles } from "./SearchStyle";
+import { styles } from './SearchStyle';
 
 const useStyles = makeStyles()(styles);
 
@@ -47,7 +47,7 @@ const Search: React.FC<SearchProps> = ({ searchParams, searchEvent }) => {
           className={classes.input}
           variant="outlined"
           label={t(`${searchParams}Input`)}
-          sx={{ "& input": { color: "text.secondary" } }}
+          sx={{ '& input': { color: 'text.secondary' } }}
           onChange={debouncedResults}
         />
       </Grid>

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 import {
   Typography,
@@ -6,17 +6,17 @@ import {
   CardMedia,
   CardContent,
   Grid,
-  CardActionArea,
-} from "@mui/material";
-import { makeStyles } from "tss-react/mui";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+  CardActionArea
+} from '@mui/material';
+import { makeStyles } from 'tss-react/mui';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // Types
-import { Data } from "types";
+import { Data } from 'types';
 
 // Styles
-import { styles } from "./CardStyle";
+import { styles } from './CardStyle';
 
 interface CardProps extends Data {
   type: string;
@@ -29,7 +29,7 @@ const Card: React.FC<CardProps> = ({
   picture,
   title,
   description,
-  type,
+  type
 }) => {
   const { classes } = useStyles();
   const navigate = useNavigate();
@@ -42,10 +42,10 @@ const Card: React.FC<CardProps> = ({
   return (
     <Grid
       item
-      sx={{ width: { lg: "30%", md: "30%", sm: "45%", xs: "70%" } }}
+      sx={{ width: { lg: '30%', md: '30%', sm: '45%', xs: '70%' } }}
       className={classes.root}
     >
-      <CardActionArea sx={{ height: "100%" }}>
+      <CardActionArea sx={{ height: '100%' }}>
         <MuiCard onClick={onCardClick} className={classes.card}>
           <CardMedia component="img" height="350" image={picture} alt="item" />
           <CardContent>
@@ -53,7 +53,7 @@ const Card: React.FC<CardProps> = ({
               {title}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {description !== "" ? description : t("emptyDescription")}
+              {description !== '' ? description : t('emptyDescription')}
             </Typography>
           </CardContent>
         </MuiCard>

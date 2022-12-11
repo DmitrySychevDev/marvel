@@ -1,8 +1,8 @@
 // Helper
-import axios from "api/helpers/axios";
+import axios from 'api/helpers/axios';
 
 // Types
-import { ComicsList } from "types/ComicsData";
+import { ComicsList } from 'types/ComicsData';
 
 export default {
   async getAllComics(
@@ -10,12 +10,12 @@ export default {
     searchParams: string | undefined
   ): Promise<ComicsList> {
     const response = await axios.get(`/v1/public/comics`, {
-      params: { offset: offsetParam, titleStartsWith: searchParams, limit: 20 },
+      params: { offset: offsetParam, titleStartsWith: searchParams, limit: 20 }
     });
     return response.data;
   },
   async getComicById(id: number): Promise<ComicsList> {
     const response = await axios.get(`/v1/public/comics/${id}`);
     return response.data;
-  },
+  }
 };

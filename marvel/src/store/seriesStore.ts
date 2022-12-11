@@ -1,9 +1,10 @@
-import { observable, action, makeObservable, runInAction } from "mobx";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { observable, action, makeObservable, runInAction } from 'mobx';
 
 // Types
-import { SeriesData, SeriesList } from "types/SeriesData";
+import { SeriesData, SeriesList } from 'types/SeriesData';
 
-import { series } from "api";
+import { series } from 'api';
 
 class SeriesStore {
   @observable
@@ -13,19 +14,19 @@ class SeriesStore {
       limit: 0,
       total: 0,
       count: 0,
-      results: [],
-    },
+      results: []
+    }
   };
 
   @observable
   series: SeriesData = {
     id: 0,
-    title: "",
-    description: "",
-    thumbnail: { path: "", extension: "" },
-    resourceURI: "",
+    title: '',
+    description: '',
+    thumbnail: { path: '', extension: '' },
+    resourceURI: '',
     comics: { items: [] },
-    characters: { items: [] },
+    characters: { items: [] }
   };
 
   @observable

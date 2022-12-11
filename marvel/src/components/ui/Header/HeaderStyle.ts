@@ -1,16 +1,16 @@
 export const styles = {
   root: {
-    minHeight: "15vh",
-    marginBottom: 50,
+    minHeight: '15vh',
+    marginBottom: 50
   },
   logo: {
-    "& img": {
+    '& img': {
       width: 100,
-      height: 50,
-    },
+      height: 50
+    }
   },
   selectItems: {
-    color: "#ffffff",
-    height: 40,
-  },
+    color: '#ffffff',
+    height: 40
+  }
 };

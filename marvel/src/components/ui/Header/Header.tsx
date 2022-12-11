@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import LightIcon from "@mui/icons-material/Brightness7";
-import DarkIcon from "@mui/icons-material/Brightness4";
+import LightIcon from '@mui/icons-material/Brightness7';
+import DarkIcon from '@mui/icons-material/Brightness4';
 import {
   AppBar,
   Grid,
@@ -10,34 +10,34 @@ import {
   Select,
   MenuItem,
   FormControl,
-  SelectChangeEvent,
-} from "@mui/material";
-import { makeStyles } from "tss-react/mui";
-import { useTranslation } from "react-i18next";
+  SelectChangeEvent
+} from '@mui/material';
+import { makeStyles } from 'tss-react/mui';
+import { useTranslation } from 'react-i18next';
 
 // Components
-import { NavigationButton } from "components";
+import { NavigationButton } from 'components';
 
 // Logo
-import MarvelLogo from "assets/marvel-logo.svg";
+import MarvelLogo from 'assets/marvel-logo.svg';
 
-import { themeStore } from "store";
+import { themeStore } from 'store';
 
 // Styles
-import { styles } from "./HeaderStyle";
+import { styles } from './HeaderStyle';
 
 const useStyles = makeStyles()(styles);
 
 const Header: React.FC = () => {
   const { classes } = useStyles(undefined);
   const linkStyle = {
-    color: "#ffffff",
+    color: '#ffffff'
   };
 
   const [isLight, setIsLight] = useState<boolean>(
-    themeStore.theme.palette.mode === "light"
+    themeStore.theme.palette.mode === 'light'
   );
-  const [lang, setLang] = useState<string>("en");
+  const [lang, setLang] = useState<string>('en');
   const { t, i18n } = useTranslation();
 
   const changeThemeEvent = () => {
@@ -58,7 +58,7 @@ const Header: React.FC = () => {
         position="static"
         color="primary"
         className={classes.root}
-        sx={{ padding: { xs: "10px 20px", md: "20px 30px", lg: "20px 30px" } }}
+        sx={{ padding: { xs: '10px 20px', md: '20px 30px', lg: '20px 30px' } }}
       >
         <Grid container justifyContent="space-between" alignItems="center">
           <Grid item className={classes.logo}>
@@ -68,17 +68,17 @@ const Header: React.FC = () => {
             <Grid container spacing={2}>
               <NavigationButton
                 linkTo="/"
-                title={t("characters")}
+                title={t('characters')}
                 styleParams={linkStyle}
               />
               <NavigationButton
                 linkTo="/comics"
-                title={t("comics")}
+                title={t('comics')}
                 styleParams={linkStyle}
               />
               <NavigationButton
                 linkTo="/series"
-                title={t("series")}
+                title={t('series')}
                 styleParams={linkStyle}
               />
             </Grid>
@@ -88,7 +88,7 @@ const Header: React.FC = () => {
               <Grid item>
                 <IconButton onClick={changeThemeEvent}>
                   {isLight ? (
-                    <LightIcon sx={{ color: "#ffffff" }} />
+                    <LightIcon sx={{ color: '#ffffff' }} />
                   ) : (
                     <DarkIcon />
                   )}
@@ -105,10 +105,10 @@ const Header: React.FC = () => {
                       className={classes.selectItems}
                       onChange={changeLang}
                     >
-                      <MenuItem sx={{ color: "#e62429" }} value="en">
+                      <MenuItem sx={{ color: '#e62429' }} value="en">
                         En
                       </MenuItem>
-                      <MenuItem sx={{ color: "#e62429" }} value="ru">
+                      <MenuItem sx={{ color: '#e62429' }} value="ru">
                         Рус
                       </MenuItem>
                     </Select>

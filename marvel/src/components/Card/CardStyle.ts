@@ -1,8 +1,8 @@
 export const styles = {
   card: {
-    height: "100%",
+    height: '100%'
   },
   root: {
-    marginTop: "40px",
-  },
+    marginTop: '40px'
+  }
 };

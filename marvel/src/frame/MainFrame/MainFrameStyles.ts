@@ -1,20 +1,20 @@
 export const styles = {
   root: {
-    minHeight: "100vh",
+    minHeight: '100vh'
   },
-  bar: { padding: "20px 30px" },
+  bar: { padding: '20px 30px' },
   header: {
-    height: "15vh",
-    marginBottom: 50,
+    height: '15vh',
+    marginBottom: 50
   },
   logo: {
-    "& img": {
+    '& img': {
       width: 100,
-      height: 50,
-    },
+      height: 50
+    }
   },
   footer: {
-    height: "22vh",
-    marginTop: 100,
-  },
+    height: '22vh',
+    marginTop: 100
+  }
 };
