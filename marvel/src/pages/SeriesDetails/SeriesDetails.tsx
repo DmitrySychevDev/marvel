@@ -19,8 +19,9 @@ const getIdByUrl = (url: string) => {
 const SeriesDetails: React.FC = observer(() => {
   const params = useParams();
   const idParams: number = params.id ? +params.id : 0;
-  const { title, description, thumbnail, comics, characters } =
-    seriesStore.series;
+
+  const { series, error } = seriesStore;
+  const { title, description, thumbnail, comics, characters } = series;
   const picture = `${thumbnail.path}.${thumbnail.extension}`;
 
   const { t } = useTranslation();
@@ -34,7 +35,7 @@ const SeriesDetails: React.FC = observer(() => {
   };
   return (
     <div>
-      {!seriesStore.error ? (
+      {!error ? (
         <div>
           <Details title={title} picture={picture} description={description} />
           <Grid container justifyContent="space-around">

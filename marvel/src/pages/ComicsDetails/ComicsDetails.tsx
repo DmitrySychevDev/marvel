@@ -19,8 +19,9 @@ const getIdByUrl = (url: string) => {
 const ComicsDetails: React.FC = observer(() => {
   const params = useParams();
   const idParams: number = params.id ? +params.id : 0;
-  const { title, description, thumbnail, characters, series } =
-    comicsStore.comic;
+
+  const { comic, error } = comicsStore;
+  const { title, description, thumbnail, characters, series } = comic;
   const picture = `${thumbnail.path}.${thumbnail.extension}`;
 
   const { t } = useTranslation();
@@ -34,7 +35,7 @@ const ComicsDetails: React.FC = observer(() => {
   };
   return (
     <div>
-      {!comicsStore.error ? (
+      {!error ? (
         <div>
           <Details
             key={idParams}

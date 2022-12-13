@@ -19,6 +19,7 @@ import { seriesStore } from 'store';
 
 const Series: React.FC = observer(() => {
   const { t } = useTranslation();
+  const { offset, searchQuery, error, loading, seriesList } = seriesStore;
   const [page, setPage] = useState<number>(1);
 
   useEffect(() => {
@@ -30,14 +31,14 @@ const Series: React.FC = observer(() => {
   }, []);
   useEffect(() => {
     seriesStore.getSeriesList();
-  }, [seriesStore.offset, seriesStore.searchQuery]);
+  }, [offset, searchQuery]);
 
   useEffect(() => {
     setPage(1);
     seriesStore.setOffset(0);
-  }, [seriesStore.searchQuery]);
+  }, [searchQuery]);
 
-  const count = seriesStore.seriesList.data.total ?? 0;
+  const count = seriesList.data.total ?? 0;
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     seriesStore.setOffset((value - 1) * 20);
@@ -48,7 +49,7 @@ const Series: React.FC = observer(() => {
   };
   return (
     <Box>
-      {!seriesStore.error && (
+      {!error && (
         <Box>
           <Typography
             variant="h2"
@@ -59,7 +60,7 @@ const Series: React.FC = observer(() => {
             {`${t('series')}(${count})`}
           </Typography>
           <Search searchParams="series" searchEvent={search} />
-          {!seriesStore.loading && (
+          {!loading && (
             <Box>
               {count ? (
                 <Box>
@@ -79,7 +80,7 @@ const Series: React.FC = observer(() => {
                     </Grid>
                   </Grid>
                   <Grid container justifyContent="space-around">
-                    {seriesStore.seriesList.data.results.map((item) => (
+                    {seriesList.data.results.map((item) => (
                       <Card
                         key={item.id}
                         id={item.id.toString()}
@@ -104,14 +105,14 @@ const Series: React.FC = observer(() => {
           )}
         </Box>
       )}
-      {seriesStore.loading && (
+      {loading && (
         <Grid container justifyContent="center">
           <Grid item>
             <CircularProgress />
           </Grid>
         </Grid>
       )}
-      {seriesStore.error && <Alert severity="error">{t('error')}</Alert>}
+      {error && <Alert severity="error">{t('error')}</Alert>}
     </Box>
   );
 });

@@ -53,7 +53,7 @@ const Card: React.FC<CardProps> = ({
               {title}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {description !== '' ? description : t('emptyDescription')}
+              {description.length ? description : t('emptyDescription')}
             </Typography>
           </CardContent>
         </MuiCard>

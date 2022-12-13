@@ -19,8 +19,9 @@ const getIdByUrl = (url: string) => {
 const CharactersDetails: React.FC = observer(() => {
   const params = useParams();
   const idParams: number = params.id ? +params.id : 0;
-  const { name, description, thumbnail, comics, series } =
-    charactersStore.character;
+
+  const { character, error } = charactersStore;
+  const { name, description, thumbnail, comics, series } = character;
   const picture = `${thumbnail.path}.${thumbnail.extension}`;
 
   const { t } = useTranslation();
@@ -34,7 +35,7 @@ const CharactersDetails: React.FC = observer(() => {
   };
   return (
     <div>
-      {!charactersStore.error ? (
+      {!error ? (
         <div>
           <Details title={name} picture={picture} description={description} />
           <Grid container justifyContent="space-around">

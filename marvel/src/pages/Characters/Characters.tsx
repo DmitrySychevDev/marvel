@@ -19,26 +19,22 @@ import { charactersStore } from 'store';
 
 const Characters: React.FC = observer(() => {
   const { t } = useTranslation();
+  const { offset, searchQuery, error, loading, characters } = charactersStore;
   const [page, setPage] = useState<number>(1);
 
   useEffect(() => {
     charactersStore.getCharactersList();
-    return () => {
-      charactersStore.setOffset(0);
-      charactersStore.setSearchQuery(undefined);
-    };
   }, []);
   useEffect(() => {
     charactersStore.getCharactersList();
-  }, [charactersStore.offset, charactersStore.searchQuery]);
+  }, [offset, searchQuery]);
 
   useEffect(() => {
     setPage(1);
     charactersStore.setOffset(0);
-    console.log('searchQuery');
-  }, [charactersStore.searchQuery]);
+  }, [searchQuery]);
 
-  const count = charactersStore.characters.data.total ?? 0;
+  const count = characters.data.total ?? 0;
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     charactersStore.setOffset((value - 1) * 20);
@@ -50,7 +46,7 @@ const Characters: React.FC = observer(() => {
 
   return (
     <Box>
-      {!charactersStore.error && (
+      {!error && (
         <Box>
           <Typography
             variant="h2"
@@ -58,10 +54,10 @@ const Characters: React.FC = observer(() => {
             color="primary"
             sx={{ marginLeft: '15px', marginBottom: '30px' }}
           >
-            {`${t('characters')}(${charactersStore.characters.data.total})`}
+            {`${t('characters')}(${characters.data.total})`}
           </Typography>
           <Search searchParams="characters" searchEvent={search} />
-          {!charactersStore.loading && (
+          {!loading && (
             <Box>
               {count ? (
                 <Box>
@@ -81,7 +77,7 @@ const Characters: React.FC = observer(() => {
                     </Grid>
                   </Grid>
                   <Grid container justifyContent="space-around">
-                    {charactersStore.characters?.data?.results.map((item) => (
+                    {characters?.data?.results.map((item) => (
                       <Card
                         key={item.id}
                         id={item.id.toString()}
@@ -106,14 +102,14 @@ const Characters: React.FC = observer(() => {
           )}
         </Box>
       )}
-      {charactersStore.loading && (
+      {loading && (
         <Grid container justifyContent="center">
           <Grid item>
             <CircularProgress />
           </Grid>
         </Grid>
       )}
-      {charactersStore.error && <Alert severity="error">{t('error')}</Alert>}
+      {error && <Alert severity="error">{t('error')}</Alert>}
     </Box>
   );
 });

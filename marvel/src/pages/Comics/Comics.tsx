@@ -19,25 +19,22 @@ import { comicsStore } from 'store';
 
 const Comics: React.FC = observer(() => {
   const { t } = useTranslation();
-  const [page, setPage] = useState<number>(1);
+  const { offset, searchQuery, error, loading, comics } = comicsStore;
+  const [page, setPage] = useState<number>(Math.ceil(offset / 20));
 
   useEffect(() => {
     comicsStore.getComicsList();
-    return () => {
-      comicsStore.setOffset(0);
-      comicsStore.setSearchQuery(undefined);
-    };
   }, []);
   useEffect(() => {
     comicsStore.getComicsList();
-  }, [comicsStore.offset, comicsStore.searchQuery]);
+  }, [offset, searchQuery]);
 
   useEffect(() => {
     setPage(1);
     comicsStore.setOffset(0);
-  }, [comicsStore.searchQuery]);
+  }, [searchQuery]);
 
-  const count = comicsStore.comics.data.total ?? 0;
+  const count = comics.data.total ?? 0;
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     comicsStore.setOffset((value - 1) * 20);
@@ -48,7 +45,7 @@ const Comics: React.FC = observer(() => {
   };
   return (
     <Box>
-      {!comicsStore.error && (
+      {!error && (
         <Box>
           <Typography
             variant="h2"
@@ -59,7 +56,7 @@ const Comics: React.FC = observer(() => {
             {`${t('comics')}(${count})`}
           </Typography>
           <Search searchParams="comics" searchEvent={search} />
-          {!comicsStore.loading && (
+          {!loading && (
             <Box>
               {count ? (
                 <Box>
@@ -79,7 +76,7 @@ const Comics: React.FC = observer(() => {
                     </Grid>
                   </Grid>
                   <Grid container justifyContent="space-around">
-                    {comicsStore.comics?.data?.results.map((item) => (
+                    {comics?.data?.results.map((item) => (
                       <Card
                         key={item.id}
                         id={item.id.toString()}
@@ -104,14 +101,14 @@ const Comics: React.FC = observer(() => {
           )}
         </Box>
       )}
-      {comicsStore.loading && (
+      {loading && (
         <Grid container justifyContent="center">
           <Grid item>
             <CircularProgress />
           </Grid>
         </Grid>
       )}
-      {comicsStore.error && <Alert severity="error">{t('error')}</Alert>}
+      {error && <Alert severity="error">{t('error')}</Alert>}
     </Box>
   );
 });
