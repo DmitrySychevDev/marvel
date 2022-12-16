@@ -5,7 +5,6 @@ import {
   Card as MuiCard,
   CardMedia,
   CardContent,
-  Grid,
   CardActionArea
 } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
@@ -40,25 +39,21 @@ const Card: React.FC<CardProps> = ({
   };
 
   return (
-    <Grid
-      item
-      sx={{ width: { lg: '30%', md: '30%', sm: '45%', xs: '70%' } }}
-      className={classes.root}
-    >
-      <CardActionArea sx={{ height: '100%' }}>
-        <MuiCard onClick={onCardClick} className={classes.card}>
-          <CardMedia component="img" height="350" image={picture} alt="item" />
-          <CardContent>
-            <Typography variant="h5" color="primary.main">
-              {title}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {description.length ? description : t('emptyDescription')}
-            </Typography>
-          </CardContent>
-        </MuiCard>
-      </CardActionArea>
-    </Grid>
+    <CardActionArea sx={{ height: '100%' }}>
+      <MuiCard onClick={onCardClick} className={classes.card}>
+        <CardMedia component="img" height="300" image={picture} alt="item" />
+        <CardContent>
+          <Typography variant="h5" color="primary.main">
+            {title}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {description?.length
+              ? `${description.substring(0, 200)}...`
+              : t('emptyDescription')}
+          </Typography>
+        </CardContent>
+      </MuiCard>
+    </CardActionArea>
   );
 };
 

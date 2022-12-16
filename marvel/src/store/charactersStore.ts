@@ -101,6 +101,31 @@ class CharactersStore {
       });
     }
   };
+
+  @action
+  getMoreCharacters = async (page: number): Promise<void> => {
+    try {
+      this.loading = true;
+      const charactersList = await characters.getAllCharacters(
+        page + 1,
+        this.searchQuery
+      );
+      runInAction(() => {
+        this.characters.data.results = [
+          ...this.characters.data.results,
+          ...charactersList.data.results
+        ];
+      });
+    } catch (ex) {
+      runInAction(() => {
+        this.error = true;
+      });
+    } finally {
+      runInAction(() => {
+        this.loading = false;
+      });
+    }
+  };
 }
 
 export default new CharactersStore();

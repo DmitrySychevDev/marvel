@@ -1,47 +1,113 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
-import {
-  Box,
-  Grid,
-  Typography,
-  Pagination,
-  CircularProgress,
-  Alert
-} from '@mui/material';
+import { Box, Grid, Typography, CircularProgress, Alert } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
+import { VirtuosoGrid, VirtuosoHandle } from 'react-virtuoso';
+import debouce from 'lodash.debounce';
 
 // Components
 import { Card, Search } from 'components';
+import {
+  ItemContainer,
+  ItemWrapper,
+  ListContainer
+} from 'components/ui/CastomGrid';
 
 // Store
 import { charactersStore } from 'store';
 
+// Types
+import { CharacterData } from 'types/CharacterData';
+
 const Characters: React.FC = observer(() => {
   const { t } = useTranslation();
-  const { offset, searchQuery, error, loading, characters } = charactersStore;
-  const [page, setPage] = useState<number>(1);
+  const { searchQuery, error, loading, characters } = charactersStore;
+  const virtuosoRef = useRef<VirtuosoHandle>(null);
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
     charactersStore.getCharactersList();
   }, []);
   useEffect(() => {
     charactersStore.getCharactersList();
-  }, [offset, searchQuery]);
-
-  useEffect(() => {
-    setPage(1);
-    charactersStore.setOffset(0);
+    setHasMore(true);
   }, [searchQuery]);
 
   const count = characters.data.total ?? 0;
 
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    charactersStore.setOffset((value - 1) * 20);
-    setPage(value);
+  const load = (index: number) => {
+    if (index + 18 >= count) {
+      setHasMore(false);
+    }
+    if (!loading && hasMore) {
+      charactersStore.getMoreCharacters(index + 1);
+    }
   };
+  const handleLoad = debouce(load, 1000);
+
   const search = (searchStr: string | undefined) => {
     charactersStore.setSearchQuery(searchStr);
+  };
+
+  const PageContent: React.FC = () => {
+    return (
+      <VirtuosoGrid
+        style={{ width: '100%', height: '100vh' }}
+        useWindowScroll
+        data={characters.data.results}
+        endReached={handleLoad}
+        components={{
+          List: ListContainer,
+          Item: ItemContainer,
+          Footer: () => {
+            return (
+              <div>
+                {loading && hasMore && (
+                  <Grid container justifyContent="center">
+                    <Grid item>
+                      <CircularProgress />
+                    </Grid>
+                  </Grid>
+                )}
+                {!hasMore && (
+                  <Typography
+                    variant="h2"
+                    color="primary"
+                    sx={{ textAlign: 'center' }}
+                  >
+                    {t('noMoreCharacters')}
+                  </Typography>
+                )}
+                {!count && !loading && (
+                  <Typography
+                    variant="h2"
+                    color="primary"
+                    sx={{ marginLeft: '15px' }}
+                  >
+                    {`${t('characters')} ${t('notFound')}`}
+                  </Typography>
+                )}
+              </div>
+            );
+          }
+        }}
+        ref={virtuosoRef}
+        itemContent={(index: number, character: CharacterData) => {
+          return (
+            <ItemWrapper>
+              <Card
+                picture={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+                title={character.name}
+                description={character.description}
+                id={character.id.toString()}
+                type="characters"
+              />
+            </ItemWrapper>
+          );
+        }}
+      />
+    );
   };
 
   return (
@@ -56,58 +122,13 @@ const Characters: React.FC = observer(() => {
           >
             {`${t('characters')}(${characters.data.total})`}
           </Typography>
-          <Search searchParams="characters" searchEvent={search} />
-          {!loading && (
-            <Box>
-              {count ? (
-                <Box>
-                  <Grid container justifyContent="center">
-                    <Grid item>
-                      <Pagination
-                        count={Math.ceil(count / 20)}
-                        color="primary"
-                        page={page}
-                        onChange={handleChange}
-                        sx={{
-                          '& .MuiPagination-ul>li': {
-                            '& button': { color: 'text.secondary' }
-                          }
-                        }}
-                      />
-                    </Grid>
-                  </Grid>
-                  <Grid container justifyContent="space-around">
-                    {characters?.data?.results.map((item) => (
-                      <Card
-                        key={item.id}
-                        id={item.id.toString()}
-                        picture={`${item.thumbnail.path}.${item.thumbnail.extension}`}
-                        title={item.name}
-                        description={item.description}
-                        type="characters"
-                      />
-                    ))}
-                  </Grid>
-                </Box>
-              ) : (
-                <Typography
-                  variant="h2"
-                  color="primary"
-                  sx={{ marginLeft: '15px' }}
-                >
-                  {`${t('characters')} ${t('notFound')}`}
-                </Typography>
-              )}
-            </Box>
-          )}
+          <Search
+            searchParams="characters"
+            searchEvent={search}
+            defaultText={searchQuery}
+          />
+          <PageContent />
         </Box>
-      )}
-      {loading && (
-        <Grid container justifyContent="center">
-          <Grid item>
-            <CircularProgress />
-          </Grid>
-        </Grid>
       )}
       {error && <Alert severity="error">{t('error')}</Alert>}
     </Box>

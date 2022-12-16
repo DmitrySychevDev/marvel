@@ -58,7 +58,10 @@ const Header: React.FC = () => {
         position="static"
         color="primary"
         className={classes.root}
-        sx={{ padding: { xs: '10px 20px', md: '20px 30px', lg: '20px 30px' } }}
+        sx={{
+          padding: { xs: '10px 20px', md: '20px 30px', lg: '20px 30px' },
+          position: 'fixed'
+        }}
       >
         <Grid container justifyContent="space-between" alignItems="center">
           <Grid item className={classes.logo}>

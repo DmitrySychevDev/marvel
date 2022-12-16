@@ -10,7 +10,7 @@ export default {
     searchParams: string | undefined
   ): Promise<CharactersList> {
     const response = await axios.get(`/v1/public/characters`, {
-      params: { offset: offsetParam, nameStartsWith: searchParams, limit: 20 }
+      params: { offset: offsetParam, nameStartsWith: searchParams, limit: 18 }
     });
     return response.data;
   },

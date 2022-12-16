@@ -16,5 +16,8 @@ export const styles = {
   footer: {
     height: '22vh',
     marginTop: 100
+  },
+  router: {
+    marginTop: '15vh'
   }
 };

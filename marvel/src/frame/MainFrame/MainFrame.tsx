@@ -64,7 +64,9 @@ const MainFrame: React.FC = () => {
       className={classes.root}
     >
       <Header />
-      <Grid item>{routesElement}</Grid>
+      <Grid item className={classes.router}>
+        {routesElement}
+      </Grid>
       <Footer />
     </Grid>
   );

@@ -9,5 +9,9 @@ export const russianText = {
   footerText: 'Данные предоставленны Marvel.',
   emptyDescription: 'Описание не предаставленно',
   notFound: 'не найдены',
-  error: 'Ошибка получения данных'
+  error: 'Ошибка получения данных',
+  noMore: 'Больше нет',
+  noMoreCharacters: 'Персонажей больше нет',
+  noMoreComics: 'Комиксов больше нет',
+  noMoreSeries: 'Сериалов больше нет'
 };

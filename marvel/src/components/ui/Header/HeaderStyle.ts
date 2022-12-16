@@ -1,7 +1,8 @@
 export const styles = {
   root: {
-    minHeight: '15vh',
-    marginBottom: 50
+    height: '12vh',
+    marginBottom: 50,
+    zIndex: 100
   },
   logo: {
     '& img': {

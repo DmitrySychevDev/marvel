@@ -36,7 +36,7 @@ const Details: React.FC<DetailsProps> = ({ title, picture, description }) => {
       </Grid>
       <Grid item sx={{ width: { lg: '45%', md: '45%', sm: '90%', xs: '90%' } }}>
         <Typography variant="h5" component="p" color="text.secondary">
-          {description.length ? description : t('emptyDescription')}
+          {description?.length ? description : t('emptyDescription')}
         </Typography>
       </Grid>
     </Grid>

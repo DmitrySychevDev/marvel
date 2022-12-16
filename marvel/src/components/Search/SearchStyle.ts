@@ -8,6 +8,7 @@ export const styles = {
   },
 
   root: {
-    marginBottom: 50
+    marginBottom: 50,
+    marginTop: 20
   }
 };

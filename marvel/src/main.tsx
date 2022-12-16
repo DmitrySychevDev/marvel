@@ -10,9 +10,7 @@ import App from 'App';
 import 'translate/i18Instans';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
-  </React.StrictMode>
+  <Router>
+    <App />
+  </Router>
 );

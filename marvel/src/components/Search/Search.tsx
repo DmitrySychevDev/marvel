@@ -13,9 +13,14 @@ const useStyles = makeStyles()(styles);
 interface SearchProps {
   searchParams: string;
   searchEvent: (params: string | undefined) => void;
+  defaultText?: string;
 }
 
-const Search: React.FC<SearchProps> = ({ searchParams, searchEvent }) => {
+const Search: React.FC<SearchProps> = ({
+  searchParams,
+  searchEvent,
+  defaultText
+}) => {
   const { classes } = useStyles();
   const { t } = useTranslation();
 
@@ -46,6 +51,7 @@ const Search: React.FC<SearchProps> = ({ searchParams, searchEvent }) => {
         <TextField
           className={classes.input}
           variant="outlined"
+          defaultValue={defaultText ?? ''}
           label={t(`${searchParams}Input`)}
           sx={{ '& input': { color: 'text.secondary' } }}
           onChange={debouncedResults}
