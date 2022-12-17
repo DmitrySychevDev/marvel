@@ -59,10 +59,7 @@ class SeriesStore {
   getSeriesList = async (): Promise<void> => {
     try {
       this.loading = true;
-      const seriesResp = await series.getAllSeries(
-        this.offset,
-        this.searchQuery
-      );
+      const seriesResp = await series.getAllSeries(0, this.searchQuery);
 
       runInAction(() => {
         this.seriesList.data = seriesResp.data;
@@ -94,6 +91,28 @@ class SeriesStore {
         this.error = true;
       });
       console.error(ex);
+    } finally {
+      runInAction(() => {
+        this.loading = false;
+      });
+    }
+  };
+
+  @action
+  getMoreSeries = async (page: number): Promise<void> => {
+    try {
+      this.loading = true;
+      const seriesResp = await series.getAllSeries(page + 1, this.searchQuery);
+      runInAction(() => {
+        this.seriesList.data.results = [
+          ...this.seriesList.data.results,
+          ...seriesResp.data.results
+        ];
+      });
+    } catch (ex) {
+      runInAction(() => {
+        this.error = true;
+      });
     } finally {
       runInAction(() => {
         this.loading = false;

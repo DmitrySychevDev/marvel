@@ -70,7 +70,7 @@ const Characters: React.FC = observer(() => {
                     </Grid>
                   </Grid>
                 )}
-                {!hasMore && (
+                {!hasMore && !loading && (
                   <Typography
                     variant="h2"
                     color="primary"

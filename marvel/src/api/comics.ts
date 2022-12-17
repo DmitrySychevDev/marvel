@@ -10,7 +10,7 @@ export default {
     searchParams: string | undefined
   ): Promise<ComicsList> {
     const response = await axios.get(`/v1/public/comics`, {
-      params: { offset: offsetParam, titleStartsWith: searchParams, limit: 20 }
+      params: { offset: offsetParam, titleStartsWith: searchParams, limit: 18 }
     });
     return response.data;
   },

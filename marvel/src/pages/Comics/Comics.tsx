@@ -1,48 +1,115 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-import {
-  Typography,
-  Box,
-  Grid,
-  Pagination,
-  CircularProgress,
-  Alert
-} from '@mui/material';
+import { Typography, Box, Grid, CircularProgress, Alert } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
+import { VirtuosoGrid, VirtuosoHandle } from 'react-virtuoso';
+import debouce from 'lodash.debounce';
 
 // Components
 import { Search, Card } from 'components';
+import {
+  ItemContainer,
+  ItemWrapper,
+  ListContainer
+} from 'components/ui/CastomGrid';
 
 // Store
 import { comicsStore } from 'store';
 
+// Types
+import { ComicsData } from 'types/ComicsData';
+
 const Comics: React.FC = observer(() => {
   const { t } = useTranslation();
-  const { offset, searchQuery, error, loading, comics } = comicsStore;
-  const [page, setPage] = useState<number>(Math.ceil(offset / 20));
+  const { searchQuery, error, loading, comics } = comicsStore;
+  const virtuosoRef = useRef<VirtuosoHandle>(null);
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
     comicsStore.getComicsList();
   }, []);
   useEffect(() => {
     comicsStore.getComicsList();
-  }, [offset, searchQuery]);
-
-  useEffect(() => {
-    setPage(1);
-    comicsStore.setOffset(0);
+    setHasMore(true);
   }, [searchQuery]);
 
   const count = comics.data.total ?? 0;
 
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    comicsStore.setOffset((value - 1) * 20);
-    setPage(value);
+  const load = (index: number) => {
+    if (index + 18 >= count) {
+      setHasMore(false);
+    }
+    if (!loading && hasMore) {
+      comicsStore.getMoreComics(index + 1);
+    }
   };
+  const handleLoad = debouce(load, 1000);
+
   const search = (searchStr: string | undefined) => {
     comicsStore.setSearchQuery(searchStr);
   };
+
+  const PageContent: React.FC = () => {
+    return (
+      <VirtuosoGrid
+        style={{ width: '100%', height: '100vh' }}
+        useWindowScroll
+        data={comics.data.results}
+        endReached={handleLoad}
+        components={{
+          List: ListContainer,
+          Item: ItemContainer,
+          Footer: () => {
+            return (
+              <div>
+                {loading && hasMore && (
+                  <Grid container justifyContent="center">
+                    <Grid item>
+                      <CircularProgress />
+                    </Grid>
+                  </Grid>
+                )}
+                {!hasMore && !loading && (
+                  <Typography
+                    variant="h2"
+                    color="primary"
+                    sx={{ textAlign: 'center' }}
+                  >
+                    {t('noMoreComics')}
+                  </Typography>
+                )}
+                {!count && !loading && (
+                  <Typography
+                    variant="h2"
+                    color="primary"
+                    sx={{ marginLeft: '15px' }}
+                  >
+                    {`${t('comics')} ${t('notFound')}`}
+                  </Typography>
+                )}
+              </div>
+            );
+          }
+        }}
+        ref={virtuosoRef}
+        itemContent={(index: number, comic: ComicsData) => {
+          return (
+            <ItemWrapper>
+              <Card
+                picture={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+                title={comic.title}
+                description={comic.description}
+                id={comic.id.toString()}
+                type="comics"
+              />
+            </ItemWrapper>
+          );
+        }}
+      />
+    );
+  };
+
   return (
     <Box>
       {!error && (
@@ -55,60 +122,15 @@ const Comics: React.FC = observer(() => {
           >
             {`${t('comics')}(${count})`}
           </Typography>
-          <Search searchParams="comics" searchEvent={search} />
-          {!loading && (
-            <Box>
-              {count ? (
-                <Box>
-                  <Grid container justifyContent="center">
-                    <Grid item>
-                      <Pagination
-                        count={Math.ceil(count / 20)}
-                        color="primary"
-                        page={page}
-                        onChange={handleChange}
-                        sx={{
-                          '& .MuiPagination-ul>li': {
-                            '& button': { color: 'text.secondary' }
-                          }
-                        }}
-                      />
-                    </Grid>
-                  </Grid>
-                  <Grid container justifyContent="space-around">
-                    {comics?.data?.results.map((item) => (
-                      <Card
-                        key={item.id}
-                        id={item.id.toString()}
-                        picture={`${item.thumbnail.path}.${item.thumbnail.extension}`}
-                        title={item.title}
-                        description={item.description}
-                        type="comics"
-                      />
-                    ))}
-                  </Grid>
-                </Box>
-              ) : (
-                <Typography
-                  variant="h2"
-                  color="primary"
-                  sx={{ marginLeft: '15px' }}
-                >
-                  {`${t('comics')} ${t('notFound')}`}
-                </Typography>
-              )}
-            </Box>
-          )}
+          <Search
+            searchParams="comics"
+            searchEvent={search}
+            defaultText={searchQuery}
+          />
+          <PageContent />
+          {error && <Alert severity="error">{t('error')}</Alert>}
         </Box>
       )}
-      {loading && (
-        <Grid container justifyContent="center">
-          <Grid item>
-            <CircularProgress />
-          </Grid>
-        </Grid>
-      )}
-      {error && <Alert severity="error">{t('error')}</Alert>}
     </Box>
   );
 });

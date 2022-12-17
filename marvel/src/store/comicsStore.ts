@@ -59,10 +59,7 @@ class ComicsStore {
   getComicsList = async (): Promise<void> => {
     try {
       this.loading = true;
-      const comicsList = await comics.getAllComics(
-        this.offset,
-        this.searchQuery
-      );
+      const comicsList = await comics.getAllComics(0, this.searchQuery);
 
       runInAction(() => {
         this.comics.data = comicsList.data;
@@ -89,6 +86,28 @@ class ComicsStore {
       runInAction(() => {
         [this.comic] = comic.data.results;
         this.error = false;
+      });
+    } catch (ex) {
+      runInAction(() => {
+        this.error = true;
+      });
+    } finally {
+      runInAction(() => {
+        this.loading = false;
+      });
+    }
+  };
+
+  @action
+  getMoreComics = async (page: number): Promise<void> => {
+    try {
+      this.loading = true;
+      const comicsList = await comics.getAllComics(page + 1, this.searchQuery);
+      runInAction(() => {
+        this.comics.data.results = [
+          ...this.comics.data.results,
+          ...comicsList.data.results
+        ];
       });
     } catch (ex) {
       runInAction(() => {
