@@ -1,19 +1,19 @@
-import i18next from "i18next";
-import { initReactI18next } from "react-i18next";
+import i18next from 'i18next';
+import { initReactI18next } from 'react-i18next';
 
 // Texts
-import { russianText } from "./russian";
-import { englishText } from "./english";
+import { russianText } from './russian';
+import { englishText } from './english';
 
 i18next.use(initReactI18next).init({
   debug: true,
-  fallbackLng: "en",
+  fallbackLng: 'en',
   resources: {
     en: {
-      translation: englishText,
+      translation: englishText
     },
     ru: {
-      translation: russianText,
-    },
-  },
+      translation: russianText
+    }
+  }
 });

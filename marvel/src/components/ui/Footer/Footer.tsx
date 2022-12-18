@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
-import { AppBar, Grid, Typography, Link } from "@mui/material";
-import { makeStyles } from "tss-react/mui";
-import { useTranslation } from "react-i18next";
+import { AppBar, Grid, Typography, Link } from '@mui/material';
+import { makeStyles } from 'tss-react/mui';
+import { useTranslation } from 'react-i18next';
 
 // Logo
-import MarvelLogo from "assets/marvel-logo.svg";
+import MarvelLogo from 'assets/marvel-logo.svg';
 
 // Styles
-import { styles } from "./FooterStyle";
+import { styles } from './FooterStyle';
 
 const useStyles = makeStyles()(styles);
 
@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
           <Grid item className={classes.logo}>
             <img src={MarvelLogo} alt="logo" />
             <Typography variant="body1" component="h3">
-              {`${t("footerText")} © ${year} MARVEl`}
+              {`${t('footerText')} © ${year} MARVEl`}
             </Typography>
             <div>
               <Link

@@ -1,13 +1,13 @@
 export const styles = {
   root: {
-    padding: "20px 30px",
-    height: "22vh",
-    marginTop: 100,
+    padding: '20px 30px',
+    height: '22vh',
+    marginTop: 100
   },
   logo: {
-    "& img": {
+    '& img': {
       width: 100,
-      height: 50,
-    },
-  },
+      height: 50
+    }
+  }
 };

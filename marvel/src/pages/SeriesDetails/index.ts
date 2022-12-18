@@ -1,1 +1,1 @@
-export { default as SeriesDetails } from "./SeriesDetails";
+export { default as SeriesDetails } from './SeriesDetails';

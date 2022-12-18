@@ -1,24 +1,31 @@
-import React from "react";
+import React, { useState } from 'react';
 
 import {
   Typography,
   Card as MuiCard,
   CardMedia,
   CardContent,
-  Grid,
   CardActionArea,
-} from "@mui/material";
-import { makeStyles } from "tss-react/mui";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+  CardHeader,
+  IconButton
+} from '@mui/material';
+import { makeStyles } from 'tss-react/mui';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import NotSelectedIcon from '@mui/icons-material/FavoriteBorder';
+import Selected from '@mui/icons-material/Favorite';
 
 // Types
-import { Data } from "types";
+import { Data } from 'types';
+
+// Stores
+import { cardStore } from 'store';
 
 // Styles
-import { styles } from "./CardStyle";
 
-interface CardProps extends Data {
+import { styles } from './CardStyle';
+
+export interface CardProps extends Data {
   type: string;
 }
 
@@ -29,36 +36,60 @@ const Card: React.FC<CardProps> = ({
   picture,
   title,
   description,
-  type,
+  type
 }) => {
   const { classes } = useStyles();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { cardsKeys } = cardStore;
+  const [isSelected, setIsSelected] = useState<boolean>(
+    cardsKeys.includes(type + id)
+  );
 
   const onCardClick: () => void = () => {
     navigate(`/${type}/${id}`);
   };
 
+  const onHeartClick = () => {
+    if (isSelected) {
+      cardStore.deleteCard(type + id);
+    } else {
+      cardStore.addCard(id, picture, title, type, description);
+    }
+    setIsSelected((prev) => !prev);
+  };
+  console.log(cardsKeys);
+
   return (
-    <Grid
-      item
-      sx={{ width: { lg: "30%", md: "30%", sm: "45%", xs: "70%" } }}
-      className={classes.root}
-    >
-      <CardActionArea sx={{ height: "100%" }}>
-        <MuiCard onClick={onCardClick} className={classes.card}>
-          <CardMedia component="img" height="350" image={picture} alt="item" />
-          <CardContent>
-            <Typography variant="h5" color="primary.main">
-              {title}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {description !== "" ? description : t("emptyDescription")}
-            </Typography>
-          </CardContent>
-        </MuiCard>
+    <MuiCard className={classes.card}>
+      <CardHeader
+        title={
+          <Typography variant="h5" color="primary">
+            {title}
+          </Typography>
+        }
+        action={
+          <IconButton onClick={onHeartClick}>
+            {isSelected ? (
+              <Selected color="primary" />
+            ) : (
+              <NotSelectedIcon color="primary" />
+            )}
+          </IconButton>
+        }
+        sx={{ color: 'primary' }}
+      />
+      <CardActionArea sx={{ height: '100%' }} onClick={onCardClick}>
+        <CardMedia component="img" height="300" image={picture} alt="item" />
+        <CardContent>
+          <Typography variant="body2" color="text.secondary">
+            {description?.length
+              ? `${description.substring(0, 200)}...`
+              : t('emptyDescription')}
+          </Typography>
+        </CardContent>
       </CardActionArea>
-    </Grid>
+    </MuiCard>
   );
 };
 

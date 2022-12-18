@@ -1,22 +1,22 @@
-import { Theme } from "@mui/system";
-import { createTheme, responsiveFontSizes } from "@mui/material";
+import { Theme } from '@mui/system';
+import { createTheme, responsiveFontSizes } from '@mui/material';
 
 export const lightTheme: Theme = responsiveFontSizes(
   createTheme({
     palette: {
-      mode: "light",
+      mode: 'light',
       primary: {
-        main: "#e62429",
+        main: '#e62429'
       },
       secondary: {
-        main: "#696969",
+        main: '#696969'
       },
       warning: {
-        main: "#f50057",
+        main: '#f50057'
       },
       text: {
-        primary: "#ffffff",
-      },
-    },
+        primary: '#ffffff'
+      }
+    }
   })
 );

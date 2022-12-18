@@ -1,26 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
-import { useParams } from "react-router-dom";
-import { Typography, Grid, Alert } from "@mui/material";
-import { useTranslation } from "react-i18next";
-import { observer } from "mobx-react-lite";
+import { useParams } from 'react-router-dom';
+import { Typography, Grid, Alert } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { observer } from 'mobx-react-lite';
 
 // Components
-import { Details, NavigationButton } from "components";
+import { Details, NavigationButton } from 'components';
 
 // Store
-import { charactersStore } from "store";
+import { charactersStore } from 'store';
 
 const getIdByUrl = (url: string) => {
-  const arr = url.split("/");
+  const arr = url.split('/');
   return arr[arr.length - 1];
 };
 
 const CharactersDetails: React.FC = observer(() => {
   const params = useParams();
   const idParams: number = params.id ? +params.id : 0;
-  const { name, description, thumbnail, comics, series } =
-    charactersStore.character;
+
+  const { character, error } = charactersStore;
+  const { name, description, thumbnail, comics, series } = character;
   const picture = `${thumbnail.path}.${thumbnail.extension}`;
 
   const { t } = useTranslation();
@@ -30,11 +31,11 @@ const CharactersDetails: React.FC = observer(() => {
   }, []);
 
   const linkStyle = {
-    color: "#4682B4",
+    color: '#4682B4'
   };
   return (
     <div>
-      {!charactersStore.error ? (
+      {!error ? (
         <div>
           <Details title={name} picture={picture} description={description} />
           <Grid container justifyContent="space-around">
@@ -43,7 +44,7 @@ const CharactersDetails: React.FC = observer(() => {
                 <Grid container flexDirection="column" spacing={3}>
                   <Grid item>
                     <Typography variant="h5" color="primary">
-                      {t("series")}
+                      {t('series')}
                     </Typography>
                     {series.items.map((item) => (
                       <Grid item>
@@ -64,7 +65,7 @@ const CharactersDetails: React.FC = observer(() => {
                 <Grid container flexDirection="column" spacing={3}>
                   <Grid item>
                     <Typography variant="h5" color="primary">
-                      {t("comics")}
+                      {t('comics')}
                     </Typography>
                     {comics.items.map((item) => (
                       <Grid item>
@@ -83,7 +84,7 @@ const CharactersDetails: React.FC = observer(() => {
           </Grid>
         </div>
       ) : (
-        <Alert severity="error">{t("error")}</Alert>
+        <Alert severity="error">{t('error')}</Alert>
       )}
     </div>
   );

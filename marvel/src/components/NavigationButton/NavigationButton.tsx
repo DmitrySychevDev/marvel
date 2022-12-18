@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import { Grid } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { Grid } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
 // Styles
-import { useStyles, ThemeProps } from "./NavigationButtonStyle";
+import { useStyles, ThemeProps } from './NavigationButtonStyle';
 
 interface NavigationButtonProps {
   linkTo: string;
@@ -15,7 +15,7 @@ interface NavigationButtonProps {
 const NavigationButton: React.FC<NavigationButtonProps> = ({
   linkTo,
   title,
-  styleParams,
+  styleParams
 }) => {
   const { classes } = useStyles(styleParams);
   return (

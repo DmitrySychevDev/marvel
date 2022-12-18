@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
-import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import { observer } from "mobx-react-lite";
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { observer } from 'mobx-react-lite';
 
 // Components
-import { MainFrame } from "frame";
+import { MainFrame } from 'frame';
 
 // Store
-import { themeStore } from "store";
+import { themeStore } from 'store';
 
 const App: React.FC = observer(() => {
   return (

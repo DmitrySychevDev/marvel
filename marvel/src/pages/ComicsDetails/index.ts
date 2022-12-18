@@ -1,1 +1,1 @@
-export { default as ComicsDetails } from "./ComicsDetails";
+export { default as ComicsDetails } from './ComicsDetails';

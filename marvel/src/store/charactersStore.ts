@@ -1,9 +1,10 @@
-import { observable, action, makeObservable, runInAction } from "mobx";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { observable, action, makeObservable, runInAction } from 'mobx';
 
 // Types
-import { CharacterData, CharactersList } from "types/CharacterData";
+import { CharacterData, CharactersList } from 'types/CharacterData';
 
-import { characters } from "api";
+import { characters } from 'api';
 
 class CharactersStore {
   @observable
@@ -13,19 +14,19 @@ class CharactersStore {
       limit: 0,
       total: 0,
       count: 0,
-      results: [],
-    },
+      results: []
+    }
   };
 
   @observable
   character: CharacterData = {
     id: 0,
-    name: "",
-    description: "",
-    thumbnail: { path: "", extension: "" },
-    resourceURI: "",
+    name: '',
+    description: '',
+    thumbnail: { path: '', extension: '' },
+    resourceURI: '',
     comics: { items: [] },
-    series: { items: [] },
+    series: { items: [] }
   };
 
   @observable
@@ -91,6 +92,31 @@ class CharactersStore {
       });
     } catch (ex) {
       console.error(ex);
+      runInAction(() => {
+        this.error = true;
+      });
+    } finally {
+      runInAction(() => {
+        this.loading = false;
+      });
+    }
+  };
+
+  @action
+  getMoreCharacters = async (page: number): Promise<void> => {
+    try {
+      this.loading = true;
+      const charactersList = await characters.getAllCharacters(
+        page + 1,
+        this.searchQuery
+      );
+      runInAction(() => {
+        this.characters.data.results = [
+          ...this.characters.data.results,
+          ...charactersList.data.results
+        ];
+      });
+    } catch (ex) {
       runInAction(() => {
         this.error = true;
       });

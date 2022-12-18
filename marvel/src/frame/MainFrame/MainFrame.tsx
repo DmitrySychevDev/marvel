@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import { Grid } from "@mui/material";
-import { makeStyles } from "tss-react/mui";
-import { Outlet, RouteObject, useRoutes } from "react-router-dom";
+import { Grid } from '@mui/material';
+import { makeStyles } from 'tss-react/mui';
+import { Outlet, RouteObject, useRoutes } from 'react-router-dom';
 
 // Components
-import { Header, Footer } from "components/ui";
+import { Header, Footer } from 'components/ui';
 import {
   Characters,
   Comics,
@@ -13,42 +13,47 @@ import {
   CharacterDetails,
   ComicsDetails,
   SeriesDetails,
-} from "pages";
+  Favourites
+} from 'pages';
 
 // Styles
-import { styles } from "./MainFrameStyles";
+import { styles } from './MainFrameStyles';
 
 const useStyles = makeStyles()(styles);
 
 const routes: RouteObject[] = [
   {
-    path: "/",
+    path: '/',
     element: <Outlet />,
     children: [
       { index: true, element: <Characters /> },
       {
-        path: "/comics",
-        element: <Comics />,
+        path: '/comics',
+        element: <Comics />
       },
       {
-        path: "/series",
-        element: <Series />,
+        path: '/series',
+        element: <Series />
       },
       {
-        path: "/characters/:id",
-        element: <CharacterDetails />,
+        path: '/characters/:id',
+        element: <CharacterDetails />
       },
       {
-        path: "/comics/:id",
-        element: <ComicsDetails />,
+        path: '/comics/:id',
+        element: <ComicsDetails />
       },
       {
-        path: "/series/:id",
-        element: <SeriesDetails />,
+        path: '/series/:id',
+        element: <SeriesDetails />
       },
-      { path: "*", element: <Characters /> },
-    ],
-  },
+      {
+        path: '/favourites',
+        element: <Favourites />
+      },
+      { path: '*', element: <Characters /> }
+    ]
+  }
 ];
 
 const MainFrame: React.FC = () => {
@@ -64,7 +69,9 @@ const MainFrame: React.FC = () => {
       className={classes.root}
     >
       <Header />
-      <Grid item>{routesElement}</Grid>
+      <Grid item className={classes.router}>
+        {routesElement}
+      </Grid>
       <Footer />
     </Grid>
   );
