@@ -63,11 +63,24 @@ const Header: React.FC = () => {
           position: 'fixed'
         }}
       >
-        <Grid container justifyContent="space-between" alignItems="center">
+        <Box
+          className={classes.headerContent}
+          sx={{
+            gridTemplateAreas: {
+              lg: '"logo link controls"',
+              sm: '"logo controls" "link link"',
+              xs: '"logo controls" "link link"',
+              md: '"logo controls" "link link"'
+            },
+            gap: '10px',
+            width: '100%',
+            justifyItems: 'center'
+          }}
+        >
           <Grid item className={classes.logo}>
             <img src={MarvelLogo} alt="logo" />
           </Grid>
-          <Grid item>
+          <Grid item className={classes.linkBlock}>
             <Grid container spacing={2}>
               <NavigationButton
                 linkTo="/"
@@ -84,9 +97,14 @@ const Header: React.FC = () => {
                 title={t('series')}
                 styleParams={linkStyle}
               />
+              <NavigationButton
+                linkTo="/favourites"
+                title="Favourites"
+                styleParams={linkStyle}
+              />
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid item className={classes.controls}>
             <Grid container alignItems="center">
               <Grid item>
                 <IconButton onClick={changeThemeEvent}>
@@ -120,7 +138,7 @@ const Header: React.FC = () => {
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
+        </Box>
       </AppBar>
     </Grid>
   );

@@ -1,6 +1,6 @@
 export const styles = {
   root: {
-    height: '12vh',
+    height: '17vh',
     marginBottom: 50,
     zIndex: 100
   },
@@ -8,10 +8,20 @@ export const styles = {
     '& img': {
       width: 100,
       height: 50
-    }
+    },
+    gridArea: 'logo'
   },
   selectItems: {
     color: '#ffffff',
     height: 40
+  },
+  headerContent: {
+    display: 'grid'
+  },
+  linkBlock: {
+    gridArea: 'link'
+  },
+  controls: {
+    gridArea: 'controls'
   }
 };

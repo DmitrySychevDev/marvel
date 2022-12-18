@@ -14,10 +14,8 @@ export const ItemContainer = styled.div`
 export const ItemWrapper = styled.div`
     background: transparent;
     width: 100%;
-    height: 500px;
   }
 `;
-
 export const ListContainer = styled.div`
   display: grid;
   grid-gap: 20px;

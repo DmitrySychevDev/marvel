@@ -4,6 +4,7 @@ import { Series } from './Series';
 import { CharacterDetails } from './CharacterDetails';
 import { ComicsDetails } from './ComicsDetails';
 import { SeriesDetails } from './SeriesDetails';
+import { Favourites } from './Favourites';
 
 export {
   Characters,
@@ -11,5 +12,6 @@ export {
   Series,
   CharacterDetails,
   ComicsDetails,
-  SeriesDetails
+  SeriesDetails,
+  Favourites
 };

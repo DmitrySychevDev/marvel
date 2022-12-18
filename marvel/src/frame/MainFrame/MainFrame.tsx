@@ -12,7 +12,8 @@ import {
   Series,
   CharacterDetails,
   ComicsDetails,
-  SeriesDetails
+  SeriesDetails,
+  Favourites
 } from 'pages';
 
 // Styles
@@ -45,6 +46,10 @@ const routes: RouteObject[] = [
       {
         path: '/series/:id',
         element: <SeriesDetails />
+      },
+      {
+        path: '/favourites',
+        element: <Favourites />
       },
       { path: '*', element: <Characters /> }
     ]
