@@ -15,7 +15,7 @@ class CardStore {
     localStorage.getItem('savedCards') ?? '[]'
   ) as CardData[];
 
-  @observable
+  @computed
   cardsKeys: string[] = this.favouritesCards.length
     ? this.favouritesCards.map((card) => card.key)
     : [];
