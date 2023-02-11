@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Timer</title>
+  </head>
+  <body>
+    <div class="timer-wraper">
+      <div class="set-time-buttons">
+        <button class="set-time-button" id="set-1min-btn">1 мин</button>
+        <button class="set-time-button" id="set-5min-btn">5 мин</button>
+        <button class="set-time-button" id="set-10min-btn">10 мин</button>
+      </div>
+      <div class="timer-controls">
+        <div class="inputs">
+          <input
+            class="control-input"
+            type="text"
+            id="minutes"
+            value="00"
+            maxlength="2"
+          />
+          <span>:</span>
+          <input
+            class="control-input"
+            type="text"
+            id="seconds"
+            value="00"
+            maxlength="2"
+          />
+        </div>
+        <div class="constrol-buttons">
+          <button class="control-button" id="start-btn">
+            <img src="./images/play-button.png" alt="start" />
+          </button>
+          <button class="control-button" id="stop-btn">
+            <img src="./images/stop-button.png" alt="stop" />
+          </button>
+          <button class="control-button" id="reset-btn">
+            <img src="./images/reset-button.png" alt="reset" />
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
