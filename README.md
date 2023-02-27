@@ -7,7 +7,7 @@ This is a React app built using Yarn and Vite that displays a list of Marvel her
 To install the app, clone the repository from GitHub:
 
 ```bash
-git clone https://github.com/DmitrySychevDev/marvel
+git clone https://github.com/DmitrySychevDev/marvel.git
 ```
 
 Then, navigate to the project directory and install the dependencies using Yarn:
